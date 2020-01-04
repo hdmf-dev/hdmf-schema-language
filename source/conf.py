@@ -48,8 +48,8 @@ master_doc = 'source/index'
 master_doc = 'index'
 
 # General information about the project.
-project = u'NWB Specification Language'
-copyright = u'2017, Neurodata Without Borders'
+project = u'HDMF Specification Language'
+copyright = u'2020, Neurodata Without Borders'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

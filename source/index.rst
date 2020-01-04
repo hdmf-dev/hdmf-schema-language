@@ -1,4 +1,4 @@
-Welcome to the NWB Specification Language
+Welcome to the HDMF Specification Language
 =========================================
 
 

@@ -9,7 +9,7 @@ PAPER          =
 BUILDDIR       = _build
 SRCDIR         = ../src
 RSTDIR         = source
-PKGNAME        = pynwb
+PKGNAME        = hdmf-schema-language
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4

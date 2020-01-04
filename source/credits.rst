@@ -6,8 +6,7 @@ Acknowledgments
 ===============
 
 For details on the partners, members, and supporters of NWB:N please the http://www.nwb.org/ project website.
-For specific contributions to the format specification and this document see the change logs of
-the Git repository at https://github.com/NeurodataWithoutBorders/nwb-schema .
+For specific contributions to the format specification and this document see the change logs.
 
 Authors
 =======

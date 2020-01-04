@@ -18,12 +18,12 @@ Version 2.0.0 (January, 2019)
 
 Summary
 ^^^^^^^
-* Simplify reuse of neurodata_types:
-    * Added new key: ```neurodata_type_def and  ```neurodata_type_inc``` (which in combination replace the keys ```neurodata_type```, ```include``` and ```merge```). See below for details.
+* Simplify reuse of data_types:
+    * Added new key: ```data_type_def and  ```data_type_inc``` (which in combination replace the keys ```data_type```, ```include``` and ```merge```). See below for details.
     * Removed key: ```include```
     * Removed key: ```merge```
     * Removed key: ```merge+```
-    * Removed key: ```neurodata_type``` (replaced by ``neurodata_type_inc`` and ``neurodata_type_def``)
+    * Removed key: ```data_type``` (replaced by ``data_type_inc`` and ``data_type_def``)
     * Removed ```\_properties``` key. The primary use of the key is to define ``abstract`` specifications. However, as format specifications don't implement functions but define a layout of objects, any spec (even if marked abstract) could still be instantiated and used in practice without limitations. Also, in the current instantiation of NWB-N this concept is only used for the ```Interface``` type and it is unclear why a user should not be able to use it.  As such this concept was removed.
     * To imporve compliance of NWB-N inheritance mechanism with established object-oriented design concepts, the option of restricting the use of subclasses in place of parent classes was removed. A subclass is always also a valid instance of a parent class. This also improves consistency with the NWB-N principle of a minimal specification that allows users to add custom data. This change affects the ```allow_subclasses``` key of links and the subclasses option of the removed ```include`` key.
 * Improve readability and avoid collision of keys by replacing values encoded in keys with dedicated key/value pairs:
@@ -38,7 +38,7 @@ Summary
     * Explicit encoding of quantitites:
         * Added new key ```quantity``` (which replaces the ```quantity_flag```). See below for details.
         * Removed ```quantity_flag``` as part of keys
-        * Removed `Exclude\_in`` key. The key is currently not used in the NWB core spec. This feature is superseded by the ability to overwrite the ```quantity``` key as part of the reuse of ```neurodata_types```
+        * Removed `Exclude\_in`` key. The key is currently not used in the NWB core spec. This feature is superseded by the ability to overwrite the ```quantity``` key as part of the reuse of ```data_types```
     * Removed ```\_description``` key. The key is no longer need because name conflicts with datasets and groups are no longer possible since the name is now explicitly encoded in a dedicated key/value pair.
 * Improve human readability:
     * Added support for YAML in addition to JSON
@@ -53,7 +53,7 @@ Summary
         * The length of the structs are used to define the length of the corresponding dimension as part of the ```shape``` key
         * ```alias``` for components of dimensions are currently encoded in the dimensions name.
 * Added support for default vs. fixed name for groups and datasets:
-     * Added ``default_name`` key for groups and dataset to allow the specification of default names for objects that can have user-defined names (in addition to fixed names via ``name``). Attributes can only have a fixed name since attributes can not have a neurodata_type and can, hence, only be identified via their fixed name.
+     * Added ``default_name`` key for groups and dataset to allow the specification of default names for objects that can have user-defined names (in addition to fixed names via ``name``). Attributes can only have a fixed name since attributes can not have a data_type and can, hence, only be identified via their fixed name.
 * Updated specification of fixed and default values for attributes to make the behavior of keys explicit:
     * Specifying attribute values:
         * Added ``default_value`` key for attributes to specify a default value for attributes
@@ -120,23 +120,23 @@ Version 1.2a replaces the ```quantity_flag``` with a new key ```quantity``` with
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To simplify the concept ```include``` and ```merge```, version 1.2a introduced a new
-key ```neurodata_type_def``` which  describes the creation of a new neurodata_type.
-The combination ```neurodata_type_def``` and ```neurodata_type_inc``
+key ```data_type_def``` which  describes the creation of a new data_type.
+The combination ```data_type_def``` and ```data_type_inc``
 simplifies the concepts of merge (i.e., inheritance/extension) and inclusion and
 allows us to express the same concepts in an easier-to-use fashion.
 Accordingly, the keys ```include```, ```merge``` and ```merge+``` have been removed in version 1.2a.
 Here a summary of the basic cases:
 
 +--------------------+--------------------+------------------------------------------------------------------------+
-| neurodata_type_inc | neurodata_type_def |  Description                                                           |
+| data_type_inc | data_type_def |  Description                                                           |
 +====================+====================+========================================================================+
 |not set             | not set            |  define standard dataset or group without a type                       |
 +--------------------+--------------------+------------------------------------------------------------------------+
-|not set             | set                |  create a new neurodata_type from scratch                              |
+|not set             | set                |  create a new data_type from scratch                              |
 +--------------------+--------------------+------------------------------------------------------------------------+
-|set                 | not set            |  include (reuse) neurodata_type without creating a new one (include)   |
+|set                 | not set            |  include (reuse) data_type without creating a new one (include)   |
 +--------------------+--------------------+------------------------------------------------------------------------+
-|set                 | set                |  merge/extend neurodata_type and create a new type (merge)             |
+|set                 | set                |  merge/extend data_type and create a new type (merge)             |
 +--------------------+--------------------+------------------------------------------------------------------------+
 
 ```structured_dimensions```
