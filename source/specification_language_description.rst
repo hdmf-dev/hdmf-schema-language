@@ -1,7 +1,7 @@
 .. _specification_language:
 
 **************************
-HDMF Specification Language
+{{ spec_format }} Specification Language
 **************************
 
 Version: |release| |today| [1]_
@@ -9,8 +9,8 @@ Version: |release| |today| [1]_
 Introduction
 ============
 
-In order to support the formal and verifiable specification of HDMF data
-file formats, HDMF defines and uses the HDMF specification language.
+In order to support the formal and verifiable specification of {{ spec_format }} data
+file formats, {{ spec_format }} defines and uses the {{ spec_format }} specification language.
 The specification language is defined in YAML (or optionally JSON) and defines formal
 structures for describing the organization of complex data using basic
 concepts, e.g., Groups, Datasets, Attributes, and Links.
@@ -26,7 +26,7 @@ NWB core format (:numref:`sec-extensions`).
       described in more detail in the HDMF storage docs available here http://nwb-storage.readthedocs.io/en/latest/
     * Data structures for interacting with the specification language documents
       (e.g, namespace and specification YAML/JSON files) are available as part of
-      HDMF. For further details see the HDMF docs available here: http://hdmf.readthedocs.io/en/latest/index.html
+      {{ spec_format }}. For further details see the {{ spec_format }} docs available here: http://{{ spec_format }}.readthedocs.io/en/latest/index.html
     * For a general overview of the NWB:N data format see here: http://nwb-overview.readthedocs.io/en/latest/
     * For detailed description of the actual NWB:N data format see here: http://nwb-schema.readthedocs.io/en/latest/index.html
 
@@ -53,11 +53,11 @@ and subsequent sections.
 
 .. tip::
 
-    The ``form`` package as part of the hdmf Python API provides dedicated
+    The ``spec`` package as part of the {{ api }} Python API provides dedicated
     data structures and utilities that support programmatic generation of
     extensions via Python programs, compared to writing YAML (or JSON)
-    extension documents by hand. One main advantage of using hdmf is that it
-    is easier to use and maintain. E.g., using hdmf helps ensure compliance of the
+    extension documents by hand. One main advantage of using {{ api }} is that it
+    is easier to use and maintain. E.g., using {{ api }} helps ensure compliance of the
     generated specification files with the current specification language and
     the Python programs can often easily be just rerun to generate updated
     versions of extension files (with little to no changes to the program itself).
@@ -116,7 +116,7 @@ The specification of a namespace looks as follows:
       - jteeters@berkeley.edu
       schema:
       - source: nwb.base.yaml
-        data_types: null
+        {{ data_types }}: null
         doc : Base nwb types
         title : Base types
       - ...
@@ -175,17 +175,17 @@ List of the schema to be included in this namespace. The specification looks as 
      - source: nwb.ephys.yaml
        doc: Types related to EPhys
        title: EPhys
-       data_types:
+       {{ data_types }}:
        - ElectricalSeries
      - namespace: core
-       data_types:
+       {{ data_types }}:
        - Interface
 
 * ``source`` describes the name of the YAML (or JSON) file with the schema specification. The schema files should be located in the same folder as the namespace file.
 * ``namespace`` describes a named reference to another namespace. In contrast to source, this is a reference by name to a known namespace (i.e., the namespace is resolved during the build and must point to an already existing namespace). This mechanism is used to allow, e.g., extension of a core namespace (here the NWB core namespace) without requiring hard paths to the files describing the core namespace.
-* ``data_types`` then is an optional list of strings indicating which data_types should be
-  included from the given specification source or namespace. The default is ``data_types: null`` indicating that all
-  neurordata_types should be included.
+* ``{{ data_types }}`` then is an optional list of strings indicating which {{ data_types }} should be
+  included from the given specification source or namespace. The default is ``{{ data_types }}: null`` indicating that all
+  {{ data_types }} should be included.
 * ``doc`` is an optional key for source files with a doc string to further document the content of the source file.
 * ``title`` is an option key for source files to provide a descriptive title for a file for documentation purposes.
 
@@ -235,7 +235,7 @@ Groups are specified as part of the top-level list or via lists stored in the ke
         default_name: Default name for the group
         doc: Required description of the group
         data_type_def: Optional new data_type for the group
-        data_type_inc: Optional data_type the group should inherit from
+        {{ data_type_inc }}: Optional data_type the group should inherit from
         quantity: Optional quantity identifier for the group (default=1).
         linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
@@ -258,7 +258,7 @@ String with the optional fixed name for the group.
 .. note::
 
     Every group must have either a unique fixed ``name`` or a unique ``data_type`` determined by
-    (``data_type_def`` and ``data_type_inc``) to enable the unique
+    (``{{ data_type_def }}`` and ``{{ data_type_inc }}``) to enable the unique
     identification of groups when stored on disk.
 
 ``default_name``
@@ -283,7 +283,7 @@ describing the group. The ``doc`` key is required.
 
 .. _sec-data-type:
 
-``data_type_inc`` and ``data_type_def``
+``{{ data_type_inc }}`` and ``{{ data_type_def }}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The concept of a data_type is similar to the concept of Class in object-oriented programming.
@@ -291,30 +291,30 @@ A data_type is a unique identifier for a specific type of group (or dataset) in 
 By assigning a data_type to a group (or dataset) enables others to reuse that type by inclusion or
 inheritance (*Note:* only groups (or datasets) with a specified type can be reused).
 
-- ```data_type_def```: This key is used to define (i.e, create) a new data_type and to assign that type to
+- ```{{ data_type_def }}```: This key is used to define (i.e, create) a new data_type and to assign that type to
   the current group (or dataset).
 
-- ```data_type_inc```: The value of the ``data_type_inc`` key describes the base type
+- ```{{ data_type_inc }}```: The value of the ``{{ data_type_inc }}`` key describes the base type
   of a group (or dataset). The value must be an existing type.
 
-Both ```data_type_def``` and ```data_type_inc``` are optional keys.
+Both ```{{ data_type_def }}``` and ```{{ data_type_inc }}``` are optional keys.
 To enable the unique identification, every group (and dataset) must either have a fixed name and/or a
 unique data_type. This means, any group (or dataset) with a variable name must have a unique data_type.
 
-The data_type is determined by the value of the ``data_type_def`` key or if no new
-type is defined then the value of ``data_type_inc`` is used to determine type. Or in other
+The data_type is determined by the value of the ``{{ data_type_def }}`` key or if no new
+type is defined then the value of ``{{ data_type_inc }}`` is used to determine type. Or in other
 words, the data_type is determined by the last type in the ancestry (i.e, inheritance hierarchy) of an object.
 
 
-**Reusing existing data_types**
+**Reusing existing {{ data_types }}**
 
-The combination of ```data_type_inc``` and ```data_type_def``` provides an easy-to-use mechanism for
+The combination of ```{{ data_type_inc }}``` and ```{{ data_type_def }}``` provides an easy-to-use mechanism for
 reuse of type specifications via inheritance (i.e., merge and extension of specifications) and inclusion (i.e,
 embedding of an existing type as a component, such as a subgroup, of a new specification). Here an overview
 of all relevant cases:
 
 +------------------------+------------------------+------------------------------------------------------------------------+
-| ``data_type_inc`` | ``data_type_def`` |  Description                                                           |
+| ``{{ data_type_inc }}`` | ``{{ data_type_def }}`` |  Description                                                           |
 +========================+========================+========================================================================+
 |not set                 | not set                |  define a standard dataset or group without a type                     |
 +------------------------+------------------------+------------------------------------------------------------------------+
@@ -330,12 +330,12 @@ of all relevant cases:
 .. code-block:: yaml
 
     # Abbreviated YAML specification
-    -   data_type_def: Series
+    -   {{ data_type_def }}: Series
         datasets:
         - name: A
 
-    -   data_type_def: MySeries
-        data_type_inc: Series
+    -   {{ data_type_def }}: MySeries
+        {{ data_type_inc }}: Series
         datasets:
         - name: B
 
@@ -345,7 +345,7 @@ if we resolve the inheritance, then the above is equivalent to:
 .. code-block:: yaml
 
     # Result:
-    -   data_type_def: MySeries
+    -   {{ data_type_def }}: MySeries
         datasets:
         - name: A
         - name: B
@@ -356,28 +356,28 @@ if we resolve the inheritance, then the above is equivalent to:
 .. code-block:: yaml
 
     # Abbreviated YAML specification
-    -   data_type_def: Series
+    -   {{ data_type_def }}: Series
         datasets:
         - name: A
 
-    -   data_type_def: MySeries
+    -   {{ data_type_def }}: MySeries
         groups:
-        - data_type_inc: Series
+        - {{ data_type_inc }}: Series
 
 
 The result of this is that ``MySeries`` now includes a group of type ``Series``, i.e., the above is equivalent to:
 
 .. code-block:: yaml
 
-   -  data_type_def: MySeries
+   -  {{ data_type_def }}: MySeries
       groups:
-      - data_type_inc: Series
+      - {{ data_type_inc }}: Series
         datasets:
           - name: A
 
 .. note::
 
-    The keys ```data_type_def`` and  ```data_type_inc``` were introduced in version 1.2a to
+    The keys ```{{ data_type_def }}`` and  ```{{ data_type_inc }}``` were introduced in version 1.2a to
     simplify the concepts of  inclusion and merging of specifications and replaced the
     keys ```include``` and ```merge```(and ```merge+```).
 
@@ -681,8 +681,8 @@ data structur for storing metadata about electrodes.
           dtype: text
           name: help
           value: a table for storing data about extracellular electrodes
-      data_type_inc: NWBData
-    data_type_def: ElectrodeTable
+      {{ data_type_inc }}: NWBData
+    {{ data_type_def }}: ElectrodeTable
 
 
 .. _sec-dims:
@@ -848,8 +848,8 @@ The specification of a datasets is described in YAML as follows:
       - name: fixed name of the dataset
         default_name: default name of the dataset
         doc: Required description of the dataset
-        data_type_def: Optional new data_type for the group
-        data_type_inc: Optional data_type the group should inherit from
+        {{ data_type_def }}: Optional new data_type for the group
+        {{ data_type_inc }}: Optional data_type the group should inherit from
         quantity: Optional quantity identifier for the group (default=1).
         linkable: Boolean indicating whether the group is linkable (default=True)
         dtype: Optional string describing the data type of the dataset
@@ -904,7 +904,7 @@ describing the dataset. The ``doc`` key is required.
 
     In earlier versions (before version 1.2a) this key was called ``description``
 
-``data_type_inc`` and ``data_type_def``
+``{{ data_type_inc }}`` and ``{{ data_type_def }}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Same as for groups. See :numref:`sec-data-type` for details.

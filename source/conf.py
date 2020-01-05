@@ -13,6 +13,7 @@
 
 import sys, os
 import sphinx_rtd_theme
+from ruamel import yaml
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -104,8 +105,27 @@ pygments_style = 'sphinx'
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
+with open('namespace_map.yml', 'r') as f:
+    html_context = yaml.safe_load(f)
+
+
+def rstjinja(app, docname, source):
+    """
+    Render our pages as a jinja template for fancy templating goodness.
+    """
+    # Make sure we're outputting HTML
+    if app.builder.format != 'html':
+        return
+    src = source[0]
+    rendered = app.builder.templates.render_string(
+        src, app.config.html_context
+    )
+    source[0] = rendered
+
+
 def setup(app):
    app.add_stylesheet("theme_overrides.css")  # overrides for wide tables in RTD theme
+   app.connect("source-read", rstjinja)
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
