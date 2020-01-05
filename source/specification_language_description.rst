@@ -284,7 +284,7 @@ describing the group. The ``doc`` key is required.
 .. _sec-data-type:
 
 ``{{ data_type_inc }}`` and ``{{ data_type_def }}``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The concept of a data_type is similar to the concept of Class in object-oriented programming.
 A data_type is a unique identifier for a specific type of group (or dataset) in a specfication.
@@ -313,17 +313,13 @@ reuse of type specifications via inheritance (i.e., merge and extension of speci
 embedding of an existing type as a component, such as a subgroup, of a new specification). Here an overview
 of all relevant cases:
 
-+------------------------+------------------------+------------------------------------------------------------------------+
-| ``{{ data_type_inc }}`` | ``{{ data_type_def }}`` |  Description                                                           |
-+========================+========================+========================================================================+
-|not set                 | not set                |  define a standard dataset or group without a type                     |
-+------------------------+------------------------+------------------------------------------------------------------------+
-|not set                 | set                    |  create a new data_type from scratch                              |
-+------------------------+------------------------+------------------------------------------------------------------------+
-|set                     | not set                |  include (reuse) data_type without creating a new one (include)   |
-+------------------------+------------------------+------------------------------------------------------------------------+
-|set                     | set                    |  merge/extend data_type and create a new type (inheritance/merge) |
-+------------------------+------------------------+------------------------------------------------------------------------+
+.. csv-table::
+   :header: ``{{ data_type_inc }}``, ``{{ data_type_def }}``, Description
+
+    not set, not set, define a standard dataset or group without a type
+    not set, set, create a new data_type from scratch
+    set, not set, include (reuse) data_type without creating a new one (include)
+    set, set, merge/extend data_type and create a new type (inheritance/merge)
 
 **Example: Reuse by inheritance**
 
