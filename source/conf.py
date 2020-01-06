@@ -14,6 +14,7 @@
 import sys, os
 import sphinx_rtd_theme
 from ruamel import yaml
+from jinja2 import Template
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -106,21 +107,16 @@ html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 with open('namespace_map.yml', 'r') as f:
-    html_context = yaml.safe_load(f)
+    namespace_map = yaml.safe_load(f)
 
 
 def rstjinja(app, docname, source):
     """
     Render our pages as a jinja template for fancy templating goodness.
     """
-    # Make sure we're outputting HTML
-    if app.builder.format != 'html':
-        return
-    src = source[0]
-    rendered = app.builder.templates.render_string(
-        src, app.config.html_context
-    )
-    source[0] = rendered
+
+    template = Template(source[0])
+    source[0] = template.render(**namespace_map)
 
 
 def setup(app):
