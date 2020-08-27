@@ -1,4 +1,4 @@
-Welcome to the HDMF Specification Language
+Welcome to the {{ spec_format }} Specification Language
 =========================================
 
 
