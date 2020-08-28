@@ -20,17 +20,19 @@ A specification typically consists of a declaration of a namespace
 and a set of schema specifications.
 Data publishers can use the specification language to extend
 the format in order to store types of data not supported by the
-NWB core format (:numref:`sec-extensions`).
+{{ spec_format }} core format (:numref:`sec-extensions`).
 
 .. seealso::
 
+    * For detailed description of the hdmf-common data format, see here:
+      http://hdmf-common-schema.readthedocs.io/en/latest/index.html
     * The mapping of objects described in the specification language to HDF5 is
-      described in more detail in the HDMF storage docs available here http://nwb-storage.readthedocs.io/en/latest/
+      described in more detail in the NWB storage docs:
+      http://nwb-storage.readthedocs.io/en/latest/
     * Data structures for interacting with the specification language documents
-      (e.g, namespace and specification YAML/JSON files) are available as part of
-      {{ spec_format }}. For further details see the {{ spec_format }} docs available here: http://{{ spec_format }}.readthedocs.io/en/latest/index.html
-    * For a general overview of the NWB:N data format see here: http://nwb-overview.readthedocs.io/en/latest/
-    * For detailed description of the actual NWB:N data format see here: http://nwb-schema.readthedocs.io/en/latest/index.html
+      (e.g., namespace and specification YAML/JSON files) are available as part of
+      {{ spec_format }}. For further details, see the {{ spec_format }} docs available here:
+      http://{{ spec_format }}.readthedocs.io/en/latest/index.html
 
 
 .. _sec-extensions:
@@ -39,17 +41,17 @@ Extensions
 ==========
 
 As mentioned, extensions to the core format are specified via custom
-user namespaces. Each namespace must have a unique name (i.e, must be
-different from core). The schema of new data_types (groups, datasets etc.)
+user namespaces. Each namespace must have a unique name (i.e., must be
+different from core). The schema of new data types (groups, datasets, etc.)
 are then specified in separate schema specification files.
 While it is possible to define multiple namespaces in the same file, most commonly,
 each new namespace will be defined in a separate file with corresponding
 schema specifications being stored in one ore more additional YAML (or JSON) files.
 One or more namespaces can be used simultaneously, so that multiple
 extensions can be used at the same time while avoiding potential
-name and type collisions between extensions (as well as extensions and the NWB core spec).
+name and type collisions between extensions (as well as with the core specification).
 
-The specification of namespaces is described in detail next in :numref:`sec-namespace-dec`
+The specification of namespaces is described in detail next in :numref:`sec-namespace-dec`,
 and the specification of schema specifications is described in :numref:`sec-schema-spec`
 and subsequent sections.
 
@@ -68,7 +70,7 @@ and subsequent sections.
 
     The ``hdmf-docutils`` package includes tools to generate Sphinx documentation from
     format specifications. In particular the executable ``hdmf_init_sphinx_extension_doc``
-    provides functionality to setup documentation for a format or extension defined
+    provides functionality to set up documentation for a format or extension defined
     by a namespace (similar to the documentation for NWB core namespace at http://nwb-schema.readthedocs.io/en/latest/ ).
     Use ``hdmf_init_sphinx_extension_doc --help`` to view the list
     of options for generating the docs. The package also includes the executable ``hdmf_generate_format_docs``
@@ -77,11 +79,10 @@ and subsequent sections.
 
 .. seealso::
 
-    For examples on how to create and use extensions in PyNWB see:
+    For examples on how to create and use extensions in PyNWB, see:
 
     * http://pynwb.readthedocs.io/en/latest/example.html#extending-nwb : Examples showing how to extend NWB
     * http://pynwb.readthedocs.io/en/latest/tutorials.html#extensions : Tutorial showing how to define and use extensions
-
 
 
 .. _sec-namespace-dec:
@@ -94,7 +95,7 @@ users to develop extensions in their own namespace and, hence, to avoid
 name/type collisions. Namespaces are defined in separate YAML files.
 The specification of a namespace looks as follows:
 
-.. code-block:: python
+.. code-block:: yaml
 
     namespaces:
     - doc: NWB namespace
@@ -171,7 +172,7 @@ Ordering of the contacts should match the ordering of the authors.
 
 List of the schema to be included in this namespace. The specification looks as follows:
 
-.. code-block:: python
+.. code-block:: yaml
 
      - source: nwb.base.yaml
      - source: nwb.ephys.yaml
@@ -183,18 +184,27 @@ List of the schema to be included in this namespace. The specification looks as 
        {{ data_types }}:
        - Interface
 
-* ``source`` describes the name of the YAML (or JSON) file with the schema specification. The schema files should be located in the same folder as the namespace file.
-* ``namespace`` describes a named reference to another namespace. In contrast to source, this is a reference by name to a known namespace (i.e., the namespace is resolved during the build and must point to an already existing namespace). This mechanism is used to allow, e.g., extension of a core namespace (here the NWB core namespace) without requiring hard paths to the files describing the core namespace.
-* ``{{ data_types }}`` then is an optional list of strings indicating which {{ data_types }} should be
-  included from the given specification source or namespace. The default is ``{{ data_types }}: null`` indicating that all
-  {{ data_types }} should be included.
+* ``source`` describes the name of the YAML (or JSON) file with the schema specification. The schema files should be
+  located in the same folder as the namespace file.
+* ``namespace`` describes a named reference to another namespace. In contrast to ``source``, this is a reference by
+  name to a known namespace (i.e., the namespace is resolved during the build and must point to an already existing
+  namespace). This mechanism is used to allow, e.g., extension of a core namespace (here the NWB core namespace)
+  without requiring hard paths to the files describing the core namespace. Either ``source`` or ``namespace`` must be
+  specified, but not both.
+* ``{{ data_types }}`` is an optional list of strings indicating which data types should be
+  included from the given specification source or namespace. The default is ``{{ data_types }}: null`` indicating that
+  all data types should be included.
 * ``doc`` is an optional key for source files with a doc string to further document the content of the source file.
 * ``title`` is an option key for source files to provide a descriptive title for a file for documentation purposes.
 
 
 .. attention::
 
-    As with any language, we can only use what is defined. This means that similar to include or import statements in programming languages, e.g., Python, the ``source`` and ``namespace`` keys must be in order of use. E.g., ``nwb.ephys.yaml`` defines ``ElectricalSeries`` which inherits from ``Timeseries`` that is defined in ``nwb.base.yaml``. This means that we have to list ``nwb.base.yaml`` before ``nwb.ephys.yaml`` since otherwise ``Timeseries`` would not be defined when ``nwb.ephys.yaml`` is trying to use it.
+    As with any language, we can only use what is defined. This means that similar to include or import statements in
+    programming languages, e.g., Python, the ``source`` and ``namespace`` keys must be in order of use. E.g.,
+    ``nwb.ephys.yaml`` defines ``ElectricalSeries`` which inherits from ``Timeseries`` that is defined in
+    ``nwb.base.yaml``. This means that we have to list ``nwb.base.yaml`` before ``nwb.ephys.yaml`` since otherwise
+    ``Timeseries`` would not be defined when ``nwb.ephys.yaml`` is trying to use it.
 
 
 .. _sec-schema-spec:
@@ -203,16 +213,10 @@ Schema specification
 ====================
 
 The schema specification defines the groups, datasets and
-relationship that make up the format. Schema specifications are stored in dict ``spec`` and
-consist of a list of Group specifications.
+relationship that make up the format.
 Schemas may be distributed across multiple YAML files to improve
 readability and to support logical organization of types.
 This is the main part of the format specification. It is described in the following sections.
-
-.. code-block:: yaml
-
-    specs:
-    - ...
 
 .. note::
 
@@ -220,6 +224,7 @@ This is the main part of the format specification. It is described in the follow
     part of a namespace by including it in the namespace as part of the ``schema``
     description of the namespace. Hence, the same schema can be reused across
     namespaces.
+
 
 .. _sec-group-spec:
 
@@ -231,21 +236,21 @@ Groups are specified as part of the top-level list or via lists stored in the ke
 
 .. code-block:: yaml
 
-
     # Group specification
-    -   name: Optional fixed name for the group. A group must either have a unique data_type or a unique, fixed name.
+    -   name: Optional fixed name for the group. A group must either have a unique data type or a unique, fixed name.
         default_name: Default name for the group
         doc: Required description of the group
-        data_type_def: Optional new data_type for the group
-        {{ data_type_inc }}: Optional data_type the group should inherit from
+        {{ data_type_def }}: Optional new data type for the group
+        {{ data_type_inc }}: Optional data type the group should inherit from
         quantity: Optional quantity identifier for the group (default=1).
         linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
-        datasets: Optional list of dataset specifications desribing the datasets contained in the group
+        datasets: Optional list of dataset specifications describing the datasets contained in the group
         links: Optional list of link specification describing the links contained in the group
-        groups: Optional list of group specifciations describing the sub-groups contained in the group
+        groups: Optional list of group specifications describing the sub-groups contained in the group
 
 The key/value pairs that make up a group specification are described in more detail next in Section :numref:`sec-group-spec-keys`.
+
 
 .. _sec-group-spec-keys:
 
@@ -259,8 +264,8 @@ String with the optional fixed name for the group.
 
 .. note::
 
-    Every group must have either a unique fixed ``name`` or a unique ``data_type`` determined by
-    (``{{ data_type_def }}`` and ``{{ data_type_inc }}``) to enable the unique
+    Every group must have either a unique fixed ``name`` or a unique data type determined by
+    ``{{ data_type_def }}`` or ``{{ data_type_inc }}`` to enable the unique
     identification of groups when stored on disk.
 
 ``default_name``
@@ -270,8 +275,8 @@ Default name of the group.
 
 .. note::
 
-    Only one of either ``name`` or ``default_name`` (or neither) should be specified as the fixed
-    name given by ``name`` would always overwrite the behavior of ``default_name``.
+    Only one of either ``name`` or ``default_name`` (or neither) should be specified. The fixed
+    name given by ``name`` will always overwrite the behavior of ``default_name``.
 
 ``doc``
 ^^^^^^^
@@ -283,35 +288,36 @@ describing the group. The ``doc`` key is required.
 
     In earlier versions (before version 1.2a) this key was called ``description``
 
+
 .. _sec-data-type:
 
-``{{ data_type_inc }}`` and ``{{ data_type_def }}``
+``{{ data_type_def }}`` and ``{{ data_type_inc }}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The concept of a data_type is similar to the concept of Class in object-oriented programming.
-A data_type is a unique identifier for a specific type of group (or dataset) in a specfication.
-By assigning a data_type to a group (or dataset) enables others to reuse that type by inclusion or
+The concept of a data type is similar to the concept of Class in object-oriented programming.
+A data type is a unique identifier for a specific type of group (or dataset) in a specification.
+By assigning a data type to a group (or dataset) enables others to reuse that type by inclusion or
 inheritance (*Note:* only groups (or datasets) with a specified type can be reused).
 
-- ```{{ data_type_def }}```: This key is used to define (i.e, create) a new data_type and to assign that type to
+- ``{{ data_type_def }}``: This key is used to define (i.e., create) a new data type and to assign that type to
   the current group (or dataset).
 
-- ```{{ data_type_inc }}```: The value of the ``{{ data_type_inc }}`` key describes the base type
+- ``{{ data_type_inc }}``: The value of the ``{{ data_type_inc }}`` key describes the base type
   of a group (or dataset). The value must be an existing type.
 
-Both ```{{ data_type_def }}``` and ```{{ data_type_inc }}``` are optional keys.
+Both ``{{ data_type_def }}`` and ``{{ data_type_inc }}`` are optional keys.
 To enable the unique identification, every group (and dataset) must either have a fixed name and/or a
-unique data_type. This means, any group (or dataset) with a variable name must have a unique data_type.
+unique data type. This means, any group (or dataset) with a variable name must have a unique data type.
 
-The data_type is determined by the value of the ``{{ data_type_def }}`` key or if no new
+The data type is determined by the value of the ``{{ data_type_def }}`` key or if no new
 type is defined then the value of ``{{ data_type_inc }}`` is used to determine type. Or in other
-words, the data_type is determined by the last type in the ancestry (i.e, inheritance hierarchy) of an object.
+words, the data type is determined by the last type in the ancestry (i.e., inheritance hierarchy) of an object.
 
 
-**Reusing existing {{ data_types }}**
+**Reusing existing data types**
 
-The combination of ```{{ data_type_inc }}``` and ```{{ data_type_def }}``` provides an easy-to-use mechanism for
-reuse of type specifications via inheritance (i.e., merge and extension of specifications) and inclusion (i.e,
+The combination of ``{{ data_type_inc }}`` and ``{{ data_type_def }}`` provides an easy-to-use mechanism for
+reuse of type specifications via inheritance (i.e., merge and extension of specifications) and inclusion (i.e.,
 embedding of an existing type as a component, such as a subgroup, of a new specification). Here an overview
 of all relevant cases:
 
@@ -319,9 +325,9 @@ of all relevant cases:
    :header: ``{{ data_type_inc }}``, ``{{ data_type_def }}``, Description
 
     not set, not set, define a standard dataset or group without a type
-    not set, set, create a new data_type from scratch
-    set, not set, include (reuse) data_type without creating a new one (include)
-    set, set, merge/extend data_type and create a new type (inheritance/merge)
+    not set, set, create a new data type from scratch
+    set, not set, include (reuse) data type without creating a new one (include)
+    set, set, merge/extend data type and create a new type (inheritance/merge)
 
 **Example: Reuse by inheritance**
 
@@ -350,7 +356,6 @@ if we resolve the inheritance, then the above is equivalent to:
 
 **Example: Reuse by inclusion**
 
-
 .. code-block:: yaml
 
     # Abbreviated YAML specification
@@ -375,9 +380,9 @@ The result of this is that ``MySeries`` now includes a group of type ``Series``,
 
 .. note::
 
-    The keys ```{{ data_type_def }}`` and  ```{{ data_type_inc }}``` were introduced in version 1.2a to
+    The keys ``{{ data_type_def }}`` and  ``{{ data_type_inc }}`` were introduced in version 1.2a to
     simplify the concepts of  inclusion and merging of specifications and replaced the
-    keys ```include``` and ```merge```(and ```merge+```).
+    keys ``include`` and ``merge`` (and ``merge+``).
 
 
 .. _sec-quantity:
@@ -412,7 +417,6 @@ then the group (or dataset) is optional and otherwise it is required. The defaul
 
 Boolean describing whether the this group can be linked.
 
-
 ``attributes``
 ^^^^^^^^^^^^^^
 
@@ -421,6 +425,9 @@ List of attribute specifications describing the attributes of the group. See :nu
 .. code-block:: yaml
 
     attributes:
+    - doc: Unit of measurement
+      name: unit
+      dtype: text
     - ...
 
 ``links``
@@ -451,7 +458,7 @@ See :numref:`sec-dataset-spec` for details.
     - name: data1
       doc: My data 1
       type: int
-      quantity: 'zero_or_one'
+      quantity: '?'
     - name: data2
       doc: My data 2
       type: text
@@ -462,13 +469,13 @@ See :numref:`sec-dataset-spec` for details.
 ``groups``
 ^^^^^^^^^^
 
-List of group specifications describing all groups to be stored as part of this group
+List of group specifications describing all groups to be stored as part of this group.
 
 .. code-block:: yaml
 
     groups:
     - name: group1
-      quantity: 'zero_or_one'
+      quantity: '?'
     - ...
 
 
@@ -489,10 +496,9 @@ Attributes
 Attributes are specified as part of lists stored in the key
 ``attributes`` as part of the specifications of ``groups`` and ``datasets``.
 Attributes are typically used to further characterize or store metadata about
-the  group, dataset, or link they are associated with. Similar to datasets, attributes
+the group or dataset they are associated with. Similar to datasets, attributes
 can define arbitrary n-dimensional arrays, but are typically used to store smaller data.
 The specification of an attributes is described in YAML as follows:
-
 
 .. code-block:: yaml
 
@@ -517,7 +523,6 @@ Attribute specification keys
 String with the name for the attribute. The ``name`` key is required and must
 specify a unique attribute on the current parent object (e.g., group or dataset)
 
-
 ``doc``
 ^^^^^^^
 
@@ -532,23 +537,23 @@ purpose and use of the attribute data. The ``doc`` key is required.
 String specifying the data type of the attribute. Allowable values are:
 
 +--------------------------+----------------------------------+----------------+
-| ``dtype`` **spec value** | **storage type**                 |   **size**     |
+| ``dtype`` **spec value** | **storage type**                 | **size**       |
 +--------------------------+----------------------------------+----------------+
-|  * "float"               | single precision floating point  |  32 bit        |
-|  * "float32"             |                                  |                |
+| * "float"                | single precision floating point  | 32 bit         |
+| * "float32"              |                                  |                |
 +--------------------------+----------------------------------+----------------+
-|  * "double"              | double precision floating point  | 64 bit         |
-|  * "float64"             |                                  |                |
+| * "double"               | double precision floating point  | 64 bit         |
+| * "float64"              |                                  |                |
 +--------------------------+----------------------------------+----------------+
-|  * "long"                | signed 64 bit integer            | 64 bit         |
-|  * "int64"               |                                  |                |
+| * "long"                 | signed 64 bit integer            | 64 bit         |
+| * "int64"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-|  * "int"                 | signed 32 bit integer            | 32 bit         |
-|  * "int32"               |                                  |                |
+| * "int"                  | signed 32 bit integer            | 32 bit         |
+| * "int32"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-|  * "int16"               | signed 16 bit integer            | 16 bit         |
+| * "int16"                | signed 16 bit integer            | 16 bit         |
 +--------------------------+----------------------------------+----------------+
-|  * "int8"                | signed 8 bit integer             | 8 bit          |
+| * "int8"                 | signed 8 bit integer             | 8 bit          |
 +--------------------------+----------------------------------+----------------+
 | * "uint32"               | unsigned 32 bit integer          | 32 bit         |
 +--------------------------+----------------------------------+----------------+
@@ -556,17 +561,17 @@ String specifying the data type of the attribute. Allowable values are:
 +--------------------------+----------------------------------+----------------+
 | * "uint8"                | unsigned 8 bit integer           | 8 bit          |
 +--------------------------+----------------------------------+----------------+
-| * "numeric"              | any numeric type (i.e., int,     | 8 to 64 bit    |
-|                          | uint, float etc.)                |                |
+| * "numeric"              | any numeric type (i.e., any int, | 8 to 64 bit    |
+|                          | uint, float)                     |                |
 +--------------------------+----------------------------------+----------------+
-|  * "text"                | unicode                          | variable       |
-|  * "utf"                 |                                  |                |
-|  * "utf8"                |                                  |                |
-|  * "utf-8"               |                                  |                |
+| * "text"                 | unicode                          | variable       |
+| * "utf"                  |                                  |                |
+| * "utf8"                 |                                  |                |
+| * "utf-8"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-|  * "ascii"               | ascii text                       | variable       |
+| * "ascii"                | ascii text                       | variable       |
 +--------------------------+----------------------------------+----------------+
-|  * "bool"                | 8 bit integer with valid values  | 8bit           |
+| * "bool"                 | 8 bit integer with valid values  | 8bit           |
 |                          | 0 or 1                           |                |
 +--------------------------+----------------------------------+----------------+
 | * "isodatetime"          | ISO8061 datetime string, e.g.,   | variable       |
@@ -575,13 +580,13 @@ String specifying the data type of the attribute. Allowable values are:
 
 .. note::
 
-    The precision indicated in the specification is generally interpreted as a minimum precision.
+    The precision indicated in the specification is interpreted as a minimum precision.
     Higher precisions may be used if required by the particular data.
 
 Reference ``dtype``
 """""""""""""""""""
 
-In additon to the above basic data types, an attribute or dataset may also store references to other
+In addition to the above basic data types, an attribute or dataset may also store references to other
 data objects. Reference ``dtypes`` are described via a dictionary. E.g.:
 
 .. code-block:: yaml
@@ -595,15 +600,14 @@ data objects. Reference ``dtypes`` are described via a dictionary. E.g.:
 ``reftype`` describes the kind of reference. Currently the specification language supports two main
 reference types.
 
-
 +--------------------------+-------------------------------------+
 | ``reftype`` **value**    | **Reference type description**      |
 +--------------------------+-------------------------------------+
-|  * "ref"                 | Reference to another group or       |
-|  * "reference"           | dataset of the given `              |
-|  * "object"              | ``target_type``                     |
+| * "ref"                  | Reference to another group or       |
+| * "reference"            | dataset of the given                |
+| * "object"               | ``target_type``                     |
 +--------------------------+-------------------------------------+
-|  * region                | Reference to a region (i.e. subset) |
+| * region                 | Reference to a region (i.e. subset) |
 |                          | of another dataset of the given     |
 |                          | ``target_type``                     |
 +--------------------------+-------------------------------------+
@@ -613,7 +617,7 @@ Compound ``dtype``
 
 Compound data types are essentially a ``struct``, i.e., the data type is a composition of several primitive types.
 This is useful to specify complex types, e.g., for storage of complex numbers consisting of a real and imaginary components,
-vectors or tensors, as well to create table-like data structures. Compond data types are created by defining a list of
+vectors or tensors, as well to create table-like data structures. Compound data types are created by defining a list of
 the form:
 
 .. code-block:: yaml
@@ -622,20 +626,18 @@ the form:
     - name: <name of the data value>
       dtype: <one of the above basic dtype stings or references>
       doc: <description of the data>
-   - name: ....
-     .
-     .
-     .
+    - name: ...
+      dtype: ...
+      doc: ...
+    - ...
 
 .. note::
 
     Currently only "flat" compound types are allowed, i.e., a compound type may not contain other compound types
-    but may itself only consist of basic dtypes, e.g,. float, string, etc. or reference dtypes.
+    but may itself only consist of basic dtypes, e.g., float, string, etc. or reference dtypes.
 
-
-Below and example form the NWB:N format specification showing the use of compound data types to create a table-like
-data structur for storing metadata about electrodes.
-
+Below is an example from an older version of the NWB format specification showing the use of compound data types to
+create a table-like data structure for storing metadata about electrodes.
 
 .. code-block:: yaml
 
@@ -702,7 +704,7 @@ a single list of strings:
     - dim1
     - dim2
 
-In case that the attribute may have different forms, this will be a list of lists:
+In case the attribute may have different forms, this will be a list of lists:
 
 .. code-block:: yaml
 
@@ -734,7 +736,7 @@ restricted. E.g.:
     - 3
 
 Similar to ``dims`` shape may also be a list of lists in case that the attribute
-may have multiple valid shape options, e.g,:
+may have multiple valid shape options, e.g.:
 
 .. code-block:: yaml
 
@@ -752,7 +754,6 @@ The default behavior for shape is:
     shape: null
 
 indicating that the attribute/dataset is a scalar.
-
 
 
 ``required``
@@ -828,14 +829,14 @@ Optional key specifying the ``name`` of the link.
 ``quantity``
 ^^^^^^^^^^^^
 
-Optional key specifying how many allowable instances for that link. Default is 1. If `name` is defined, quantity may not be >1. See :numref:`sec-quantity` for details.
+Optional key specifying how many allowable instances for that link. Default is 1. If `name` is defined, quantity may not
+be >1. See :numref:`sec-quantity` for details.
 
 
 .. _sec-dataset-spec:
 
 Datasets
 ========
-
 
 Datasets are specified as part of lists stored in the key ``datasets`` as part of group specifications.
 The specification of a datasets is described in YAML as follows:
@@ -846,8 +847,8 @@ The specification of a datasets is described in YAML as follows:
       - name: fixed name of the dataset
         default_name: default name of the dataset
         doc: Required description of the dataset
-        {{ data_type_def }}: Optional new data_type for the group
-        {{ data_type_inc }}: Optional data_type the group should inherit from
+        {{ data_type_def }}: Optional new data type for the group
+        {{ data_type_inc }}: Optional data type the group should inherit from
         quantity: Optional quantity identifier for the group (default=1).
         linkable: Boolean indicating whether the group is linkable (default=True)
         dtype: Optional string describing the data type of the dataset
@@ -859,7 +860,7 @@ The specification of a datasets is described in YAML as follows:
 
 The specification of datasets looks quite similar to attributes and groups. Similar to
 attributes, datasets describe the storage of arbitrary n-dimensional array data.
-However, in conrast to attributes, datasets are not associated with a specific parent
+However, in contrast to attributes, datasets are not associated with a specific parent
 group or dataset object but are (similar to groups) primary data objects (and as such
 typically manage larger data than attributes).
 The key/value pairs that make up a dataset specification are described in more detail next in Section
@@ -871,7 +872,6 @@ The key/value pairs that make up a dataset specification are described in more d
 Dataset specification keys
 --------------------------
 
-
 ``name``
 ^^^^^^^^
 
@@ -879,8 +879,9 @@ String with the optional fixed name for the dataset
 
 .. note::
 
-    Every dataset must have either a unique fixed ``name`` or a unique ``data_type`` to enable the unique
-    identification of datasets when stored on disk.
+    Every dataset must have either a unique fixed ``name`` or a unique data type determined by
+    ``{{ data_type_def }}`` or ``{{ data_type_inc }}`` to enable the unique
+    identification of groups when stored on disk.
 
 ``default_name``
 ^^^^^^^^^^^^^^^^
@@ -889,7 +890,7 @@ Default name of the group.
 
 .. note::
 
-    Only one of either ``name`` or ``default_name`` (or neither) should be specified as the fixed
+    Only one of either ``name`` or ``default_name`` (or neither) should be specified. The fixed
     name given by ``name`` would always overwrite the behavior of ``default_name``.
 
 ``doc``
@@ -907,7 +908,6 @@ describing the dataset. The ``doc`` key is required.
 
 Same as for groups. See :numref:`sec-data-type` for details.
 
-
 ``quantity``
 ^^^^^^^^^^^^
 
@@ -921,7 +921,8 @@ Boolean describing whether the this group can be linked.
 ``dtype``
 ^^^^^^^^^
 
-String describing the data type of the dataset. Same as for attributes. See :numref:`sec-dtype` for details. ``dtype`` may be omitted for abstract classes. Best practice is to define ``dtype`` for most concrete classes.
+String describing the data type of the dataset. Same as for attributes. See :numref:`sec-dtype` for details. ``dtype``
+may be omitted for abstract classes. Best practice is to define ``dtype`` for most concrete classes.
 
 ``shape``
 ^^^^^^^^^
@@ -933,11 +934,9 @@ List describing the shape of the dataset. Same as for attributes. See :numref:`s
 
 List describing the names of the dimensions of the dataset. Same as for attributes. See :numref:`sec-dims` for details.
 
-
 ``value`` and ``default_value``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Same as for attributes. See :numref:`sec-value` and :numref:`sec-default_value` for details.
-
 
 ``attributes``
 ^^^^^^^^^^^^^^
