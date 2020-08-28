@@ -5,6 +5,8 @@ Release Notes
 Version 2.1.0 (Upcoming)
 ---------------------------------
 * First release as hdmf-schema-language.
+* Remove legacy description of the `specs` or `spec` key.
+* Add specification for the specification language used by each file.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------

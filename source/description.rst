@@ -96,6 +96,7 @@ The specification of a namespace looks as follows:
 
 .. code-block:: python
 
+    # hdmf-schema-language 2.2.0
     namespaces:
     - doc: NWB namespace
       name: NWB
@@ -126,6 +127,10 @@ The specification of a namespace looks as follows:
 The top-level key must be ``namespaces``. The value of ``namespaces``
 is a list with the specification of one (or more) namespaces.
 
+The beginning of the file must begin with a comment that starts with 'hdmf-schema-language' followed by a space
+and the version string of the specification language used by this namespace, e.g.,
+``hdmf-schema-language 2.2.0``. Files without this comment are assumed to be defined
+using hdmf-schema-language 2.1.0.
 
 Namespace declaration keys
 --------------------------
@@ -208,6 +213,11 @@ consist of a list of Group specifications.
 Schemas may be distributed across multiple YAML files to improve
 readability and to support logical organization of types.
 This is the main part of the format specification. It is described in the following sections.
+
+As with files defining namespaces, the beginning of each file defining schema must begin with a comment that starts
+with 'hdmf-schema-language' followed by a space and the version string of the specification language
+used by this namespace, e.g., ``hdmf-schema-language 2.2.0``. Files without this comment are assumed to be defined
+using hdmf-schema-language 2.1.0.
 
 .. code-block:: yaml
 
