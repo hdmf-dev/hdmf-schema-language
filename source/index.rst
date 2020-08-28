@@ -1,21 +1,16 @@
-Welcome to the {{ spec_format }} Specification Language
-=========================================
+The {{ spec_format }} Specification Language
+==============================================================================
 
+The HDMF specification language defines formal structures for describing the organization of complex data using basic
+concepts, e.g., Groups, Datasets, Attributes, and Links.
+
+See the full language description, release notes, and credits below.
 
 .. toctree::
-    :numbered:
-    :maxdepth: 6
-    :caption: Table of Contents
+   :numbered:
+   :maxdepth: 6
+   :caption: Table of Contents
 
-    specification_language_description
-    specification_language_release_notes
-    credits
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-
+   description
+   release_notes
+   credits
