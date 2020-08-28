@@ -1,10 +1,12 @@
 .. _specification_language:
 
-**************************
+*******************************************
 {{ spec_format }} Specification Language
-**************************
+*******************************************
 
-Version: |release| |today| [1]_
+Version: |release| [1]_
+
+Last modified: |today|
 
 Introduction
 ============
@@ -89,7 +91,7 @@ Namespaces
 
 Namespaces are used to define a collections of specifications, to enable
 users to develop extensions in their own namespace and, hence, to avoid
-name/type collisions. Namespaces are defined in seperate YAML files.
+name/type collisions. Namespaces are defined in separate YAML files.
 The specification of a namespace looks as follows:
 
 .. code-block:: python
@@ -956,11 +958,6 @@ Relationships
     implicit relationships encoded via shared dimension descriptions and implicit references in
     datasets in previous versions of the specification language.
 
-
-
 .. [1]
    The version number given here is for the specification language and
-   is independent of the version number for the NWB format. The date
-   after the version number is the last modification date of this
-   document.
-
+   is independent of the version number for the specification itself.

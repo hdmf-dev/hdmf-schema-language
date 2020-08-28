@@ -3,7 +3,7 @@
   "$id": "hdmf.schema.json",
   "title": "Schema for the HDMF language specification",
   "description": "A schema for validating HDMF YAML files and HDMF extensions",
-  "version": "2.0.2",
+  "version": "2.1.0-beta",
   "type": "object",
   "additionalProperties": false,
   "properties": {
