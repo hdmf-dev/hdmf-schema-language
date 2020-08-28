@@ -561,8 +561,8 @@ String specifying the data type of the attribute. Allowable values are:
 +--------------------------+----------------------------------+----------------+
 | * "uint8"                | unsigned 8 bit integer           | 8 bit          |
 +--------------------------+----------------------------------+----------------+
-| * "numeric"              | any numeric type (i.e., int*,    | 8 to 64 bit    |
-|                          | uint*, float*)                   |                |
+| * "numeric"              | any numeric type (i.e., any int, | 8 to 64 bit    |
+|                          | uint, float)                     |                |
 +--------------------------+----------------------------------+----------------+
 | * "text"                 | unicode                          | variable       |
 | * "utf"                  |                                  |                |
