@@ -43,7 +43,7 @@
                 "doc": {"type": "string"},
                 "source": {"type": "string"},
                 "title": {"type": "string"},
-                "neurodata_types": {
+                "data_types": {
                   "type": "array",
                   "items":  {
                     "type": "string"
