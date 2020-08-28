@@ -2,5 +2,6 @@ spec_format: HDMF
 data_type_inc: data_type_inc
 data_type_def: data_type_def
 data_types: data_types
+schema-language: hdmf-schema-language
 api: hdmf
 version: '2.1.0-beta'
