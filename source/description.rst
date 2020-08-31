@@ -179,6 +179,7 @@ List of the schema to be included in this namespace. The specification looks as 
 
 .. code-block:: yaml
 
+     # {{ schema_language }} 2.2.0
      - source: nwb.base.yaml
      - source: nwb.ephys.yaml
        doc: Types related to EPhys
@@ -188,6 +189,11 @@ List of the schema to be included in this namespace. The specification looks as 
      - namespace: core
        {{ data_types }}:
        - Interface
+       
+The beginning of all schema files must begin with a comment that starts with '{{ schema_language }}' followed by a space
+and the version string of the specification language used by this namespace, e.g.,
+``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
+using {{ schema_language }} 2.1.0.
 
 * ``source`` describes the name of the YAML (or JSON) file with the schema specification. The schema files should be
   located in the same folder as the namespace file.
