@@ -97,6 +97,7 @@ The specification of a namespace looks as follows:
 
 .. code-block:: yaml
 
+    # {{ schema_language }} 2.2.0
     namespaces:
     - doc: NWB namespace
       name: NWB
@@ -127,6 +128,10 @@ The specification of a namespace looks as follows:
 The top-level key must be ``namespaces``. The value of ``namespaces``
 is a list with the specification of one (or more) namespaces.
 
+The beginning of the file must begin with a comment that starts with '{{ schema_language }}' followed by a space
+and the version string of the specification language used by this namespace, e.g.,
+``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
+using {{ schema_language }} 2.1.0.
 
 Namespace declaration keys
 --------------------------
@@ -216,6 +221,14 @@ The schema specification defines the groups, datasets and
 relationship that make up the format.
 Schemas may be distributed across multiple YAML files to improve
 readability and to support logical organization of types.
+Schema files should have the ``groups`` key and/or the ``datasets`` key at the top level.
+
+The beginning of all schema files must begin with a comment that starts with '{{ schema_language }}' followed by a space
+and the version string of the specification language used by this namespace, e.g.,
+``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
+using {{ schema_language }} 2.1.0. The comment at the beginning of schema files must be the 
+same as the comment at the start of the namespace file that includes the schema files. 
+
 This is the main part of the format specification. It is described in the following sections.
 
 .. note::
