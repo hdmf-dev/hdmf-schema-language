@@ -7,6 +7,18 @@ concepts, e.g., Groups, Datasets, Attributes, and Links. See the
 The HDMF specification language is used by the
 [Hierarchical Data Modeling Framework (HDMF)](https://github.com/hdmf-dev/hdmf).
 
+## Customizing the language for specific applications
+
+Certain keys of the hdmf-schema-language may be customized for a particular scientific domain or use case. For example,
+the `data_types` key in the namespace may be customized to be `neurodata_types` and the
+`data_type_def` and `data_type_inc` keys in the schema may be customized to be `neurodata_type_def`
+and `neurodata_type_inc` for use in a neuroscience-specific application of the hdmf-schema-language. This can be
+easily done by forking the [hdmf-schema-language repo](https://github.com/hdmf-dev/hdmf-schema-language)
+and updating `source/namespace_map.yml` with the appropriate customizations. The `source/hdmf.schema.json` and any
+references to HDMF in the documentation should also be modified appropriately. See the [NWB schema language repo]
+(https://github.com/NeurodataWithoutBorders/nwb-schema-language) for an example of customizing the HDMF schema language
+for use as the NWB schema language.
+
 ## For maintainers
 
 The HDMF specification documentation is generated using [Sphinx](http://www.sphinx-doc.org/en/stable/index.html)
