@@ -144,7 +144,7 @@ Text description of the namespace.
 ``name``
 ^^^^^^^^
 
-Unique name used to refer to the namespace
+Unique name used to refer to the namespace.
 
 ``full_name``
 ^^^^^^^^^^^^^
@@ -159,7 +159,7 @@ Version string for the namespace
 ``date``
 ^^^^^^^^
 
-Date the namespace has been last modified or released. Formatting is ``%Y-%m-%d %H:%M:%S``, e.g, ``2017-04-25 17:14:13``
+Date the namespace has been last modified or released. Formatting is ``%Y-%m-%d %H:%M:%S``, e.g., ``2017-04-25 17:14:13``.
 
 ``author``
 ^^^^^^^^^^
@@ -226,8 +226,8 @@ Schema files should have the ``groups`` key and/or the ``datasets`` key at the t
 The beginning of all schema files must begin with a comment that starts with '{{ schema_language }}' followed by a space
 and the version string of the specification language used by this namespace, e.g.,
 ``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
-using {{ schema_language }} 2.1.0. The comment at the beginning of schema files must be the 
-same as the comment at the start of the namespace file that includes the schema files. 
+using {{ schema_language }} 2.1.0. The comment at the beginning of schema files must be the
+same as the comment at the start of the namespace file that includes the schema files.
 
 This is the main part of the format specification. It is described in the following sections.
 
@@ -250,57 +250,25 @@ Groups are specified as part of the top-level list or via lists stored in the ke
 .. code-block:: yaml
 
     # Group specification
-    -   name: Optional fixed name for the group. A group must either have a unique data type or a unique, fixed name.
+    -   {{ data_type_def }}: Optional new data type for the group
+        {{ data_type_inc }}: Optional data type the group should inherit from
+        name: Optional fixed name for the group. A group must either have a unique data type or a unique, fixed name.
         default_name: Default name for the group
         doc: Required description of the group
-        {{ data_type_def }}: Optional new data type for the group
-        {{ data_type_inc }}: Optional data type the group should inherit from
         quantity: Optional quantity identifier for the group (default=1).
         linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
         datasets: Optional list of dataset specifications describing the datasets contained in the group
-        links: Optional list of link specification describing the links contained in the group
         groups: Optional list of group specifications describing the sub-groups contained in the group
+        links: Optional list of link specifications describing the links contained in the group
 
 The key/value pairs that make up a group specification are described in more detail next in Section :numref:`sec-group-spec-keys`.
-
+The keys should be ordered as specified above for readability and consistency with the rest of the schema.
 
 .. _sec-group-spec-keys:
 
 Group specification keys
 ------------------------
-
-``name``
-^^^^^^^^
-
-String with the optional fixed name for the group.
-
-.. note::
-
-    Every group must have either a unique fixed ``name`` or a unique data type determined by
-    ``{{ data_type_def }}`` or ``{{ data_type_inc }}`` to enable the unique
-    identification of groups when stored on disk.
-
-``default_name``
-^^^^^^^^^^^^^^^^
-
-Default name of the group.
-
-.. note::
-
-    Only one of either ``name`` or ``default_name`` (or neither) should be specified. The fixed
-    name given by ``name`` will always overwrite the behavior of ``default_name``.
-
-``doc``
-^^^^^^^
-
-The value of the group specification ``doc`` key is a string
-describing the group. The ``doc`` key is required.
-
-.. note::
-
-    In earlier versions (before version 1.2a) this key was called ``description``
-
 
 .. _sec-data-type:
 
@@ -398,6 +366,38 @@ The result of this is that ``MySeries`` now includes a group of type ``Series``,
     keys ``include`` and ``merge`` (and ``merge+``).
 
 
+``name``
+^^^^^^^^
+
+String with the optional fixed name for the group.
+
+.. note::
+
+    Every group must have either a unique fixed ``name`` or a unique data type determined by
+    ``{{ data_type_def }}`` or ``{{ data_type_inc }}`` to enable the unique
+    identification of groups when stored on disk.
+
+``default_name``
+^^^^^^^^^^^^^^^^
+
+Default name of the group.
+
+.. note::
+
+    Only one of either ``name`` or ``default_name`` (or neither) should be specified. The fixed
+    name given by ``name`` will always overwrite the behavior of ``default_name``.
+
+``doc``
+^^^^^^^
+
+The value of the group specification ``doc`` key is a string
+describing the group. The ``doc`` key is required.
+
+.. note::
+
+    In earlier versions (before version 1.2a) this key was called ``description``
+
+
 .. _sec-quantity:
 
 ``quantity``
@@ -443,22 +443,6 @@ List of attribute specifications describing the attributes of the group. See :nu
       dtype: text
     - ...
 
-``links``
-^^^^^^^^^
-
-List of link specifications describing all links to be stored as part of this group.
-See :numref:`sec-link-spec` for details.
-
-.. code-block:: yaml
-
-    links:
-    - doc: Link to target type
-      name: link name
-      target_type: type of target
-      quantity: optional number of links allowed
-    - ...
-
-
 ``datasets``
 ^^^^^^^^^^^^
 
@@ -491,6 +475,21 @@ List of group specifications describing all groups to be stored as part of this 
       quantity: '?'
     - ...
 
+``links``
+^^^^^^^^^
+
+List of link specifications describing all links to be stored as part of this group.
+See :numref:`sec-link-spec` for details.
+
+.. code-block:: yaml
+
+    links:
+    - doc: Link to target type
+      name: link name
+      target_type: type of target
+      quantity: '?'
+    - ...
+
 
 ``\_required``
 ^^^^^^^^^^^^^^
@@ -518,14 +517,15 @@ The specification of an attributes is described in YAML as follows:
     ...
     attributes:
     - name: Required string describing the name of the attribute
-      doc: Required string with the description of the attribute
       dtype: Required string describing the data type of the attribute
       dims: Optional list describing the names of the dimensions of the data array stored by the attribute (default=None)
       shape: Optional list describing the allowed shape(s) of the data array stored by the attribute (default=None)
-      required: Optional boolean indicating whether the attribute is required (default=True)
       value: Optional constant, fixed value for the attribute.
       default_value: Optional default value for variable-valued attributes. Only one of value or default_value should be set.
-    -
+      doc: Required string with the description of the attribute
+      required: Optional boolean indicating whether the attribute is required (default=True)
+
+The keys should be ordered as specified above for readability and consistency with the rest of the schema.
 
 Attribute specification keys
 ----------------------------
@@ -535,12 +535,6 @@ Attribute specification keys
 
 String with the name for the attribute. The ``name`` key is required and must
 specify a unique attribute on the current parent object (e.g., group or dataset)
-
-``doc``
-^^^^^^^
-
-``doc`` specifies the documentation string for the attribute  and should describe the
-purpose and use of the attribute data. The ``doc`` key is required.
 
 .. _sec-dtype:
 
@@ -564,9 +558,12 @@ String specifying the data type of the attribute. Allowable values are:
 | * "int"                  | signed 32 bit integer            | 32 bit         |
 | * "int32"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "int16"                | signed 16 bit integer            | 16 bit         |
+| * "short"                | signed 16 bit integer            | 16 bit         |
+| * "int16"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "int8"                 | signed 8 bit integer             | 8 bit          |
++--------------------------+----------------------------------+----------------+
+| * "uint64"               | unsigned 64 bit integer          | 64 bit         |
 +--------------------------+----------------------------------+----------------+
 | * "uint32"               | unsigned 32 bit integer          | 32 bit         |
 +--------------------------+----------------------------------+----------------+
@@ -577,24 +574,29 @@ String specifying the data type of the attribute. Allowable values are:
 | * "numeric"              | any numeric type (i.e., any int, | 8 to 64 bit    |
 |                          | uint, float)                     |                |
 +--------------------------+----------------------------------+----------------+
-| * "text"                 | unicode                          | variable       |
-| * "utf"                  |                                  |                |
-| * "utf8"                 |                                  |                |
+| * "text"                 | 8-bit Unicode                    | variable       |
+| * "utf"                  |                                  | (UTF-8         |
+| * "utf8"                 |                                  | encoding)      |
 | * "utf-8"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "ascii"                | ascii text                       | variable       |
+| * "ascii"                | ASCII text                       | variable       |
+| * "bytes"                |                                  | (ASCII         |
+|                          |                                  | encoding)      |
 +--------------------------+----------------------------------+----------------+
-| * "bool"                 | 8 bit integer with valid values  | 8bit           |
+| * "bool"                 | 8 bit integer with valid values  | 8 bit          |
 |                          | 0 or 1                           |                |
 +--------------------------+----------------------------------+----------------+
-| * "isodatetime"          | ISO8061 datetime string, e.g.,   | variable       |
-|                          | 2018-09-28T14:43:54.123+02:00    |                |
+| * "isodatetime"          | ISO 8601 datetime string, e.g.,  | variable       |
+|                          | 2018-09-28T14:43:54.123+02:00    | (ASCII         |
+| * "datetime"             |                                  | encoding)      |
 +--------------------------+----------------------------------+----------------+
 
 .. note::
 
     The precision indicated in the specification is interpreted as a minimum precision.
     Higher precisions may be used if required by the particular data.
+    In addition, since valid ASCII text is valid UTF-8-encoded Unicode, ASCII text may be used
+    where 8-bit Unicode is required. 8-bit Unicode cannot be used where ASCII is required.
 
 Reference ``dtype``
 """""""""""""""""""
@@ -739,7 +741,7 @@ Optional key describing the shape of the array stored as the value of the attrib
 The description of ``shape`` must match the description of dimensions in so far as
 if we name two dimensions in ``dims`` than we must also specify the ``shape`` for
 two dimensions. We may specify ``null`` in case that the length of a dimension is not
-restricted. E.g.:
+restricted, e.g.:
 
 .. code-block:: yaml
 
@@ -768,12 +770,6 @@ The default behavior for shape is:
 
 indicating that the attribute/dataset is a scalar.
 
-
-``required``
-^^^^^^^^^^^^
-
-Optional boolean key describing whether the attribute is required. Default value is True.
-
 .. _sec-value:
 
 ``value``
@@ -795,6 +791,17 @@ default value is used in case that the user does not specify a specific value fo
     Only one of either ``value`` or ``default_value`` should be specified (or neither) but never
     both at the same time, as ``value`` would always overwrite the ``default_value``.
 
+``doc``
+^^^^^^^
+
+``doc`` specifies the documentation string for the attribute  and should describe the
+purpose and use of the attribute data. The ``doc`` key is required.
+
+``required``
+^^^^^^^^^^^^
+
+Optional boolean key describing whether the attribute is required. Default value is True.
+
 
 .. _sec-link-spec:
 
@@ -807,9 +814,10 @@ The link specification is a dictionary with the following form:
 .. code-block:: yaml
 
     links:
-    - doc: Link to target type
-      name: link name
-      target_type: type of target
+    - name: Link name
+      doc: Required string with the description of the link
+      target_type: Type of target
+      quantity: Optional quantity identifier for the group (default=1).
 
 .. note::
 
@@ -818,8 +826,15 @@ The link specification is a dictionary with the following form:
     used instead of hard links.
 
 
+The keys should be ordered as specified above for readability and consistency with the rest of the schema.
+
 Link specification keys
 ------------------------
+
+``name``
+^^^^^^^^
+
+Optional key specifying the ``name`` of the link.
 
 ``target_type``
 ^^^^^^^^^^^^^^^
@@ -833,11 +848,6 @@ instance of that structure.
 
 ``doc`` specifies the documentation string for the link and  should describe the
 purpose and use of the linked data. The ``doc`` key is required.
-
-``name``
-^^^^^^^^
-
-Optional key specifying the ``name`` of the link.
 
 ``quantity``
 ^^^^^^^^^^^^
@@ -857,18 +867,18 @@ The specification of a datasets is described in YAML as follows:
 .. code-block:: yaml
 
     - datasets:
-      - name: fixed name of the dataset
-        default_name: default name of the dataset
-        doc: Required description of the dataset
-        {{ data_type_def }}: Optional new data type for the group
+      - {{ data_type_def }}: Optional new data type for the group
         {{ data_type_inc }}: Optional data type the group should inherit from
-        quantity: Optional quantity identifier for the group (default=1).
-        linkable: Boolean indicating whether the group is linkable (default=True)
+        name: fixed name of the dataset
+        default_name: default name of the dataset
         dtype: Optional string describing the data type of the dataset
         dims: Optional list describing the names of the dimensions of the dataset
         shape: Optional list describing the shape (or possible shapes) of the dataset
         value: Optional to fix value of dataset
         default_value: Optional to set a default value for the dataset
+        doc: Required description of the dataset
+        quantity: Optional quantity identifier for the group (default=1).
+        linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
 
 The specification of datasets looks quite similar to attributes and groups. Similar to
@@ -877,13 +887,19 @@ However, in contrast to attributes, datasets are not associated with a specific 
 group or dataset object but are (similar to groups) primary data objects (and as such
 typically manage larger data than attributes).
 The key/value pairs that make up a dataset specification are described in more detail next in Section
-:numref:`sec-dataset-spec-keys`.
+:numref:`sec-dataset-spec-keys`. The keys should be ordered as specified above for readability and consistency with the
+rest of the schema.
 
 
 .. _sec-dataset-spec-keys:
 
 Dataset specification keys
 --------------------------
+
+``{{ data_type_inc }}`` and ``{{ data_type_def }}``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Same as for groups. See :numref:`sec-data-type` for details.
 
 ``name``
 ^^^^^^^^
@@ -906,31 +922,6 @@ Default name of the group.
     Only one of either ``name`` or ``default_name`` (or neither) should be specified. The fixed
     name given by ``name`` would always overwrite the behavior of ``default_name``.
 
-``doc``
-^^^^^^^
-
-The value of the dataset specification ``doc`` key is a string
-describing the dataset. The ``doc`` key is required.
-
-.. note::
-
-    In earlier versions (before version 1.2a) this key was called ``description``
-
-``{{ data_type_inc }}`` and ``{{ data_type_def }}``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Same as for groups. See :numref:`sec-data-type` for details.
-
-``quantity``
-^^^^^^^^^^^^
-
-Same as for groups. See :numref:`sec-quantity` for details.
-
-``linkable``
-^^^^^^^^^^^^
-
-Boolean describing whether the this group can be linked.
-
 ``dtype``
 ^^^^^^^^^
 
@@ -950,6 +941,26 @@ List describing the names of the dimensions of the dataset. Same as for attribut
 ``value`` and ``default_value``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Same as for attributes. See :numref:`sec-value` and :numref:`sec-default_value` for details.
+
+``doc``
+^^^^^^^
+
+The value of the dataset specification ``doc`` key is a string
+describing the dataset. The ``doc`` key is required.
+
+.. note::
+
+    In earlier versions (before version 1.2a) this key was called ``description``
+
+``quantity``
+^^^^^^^^^^^^
+
+Same as for groups. See :numref:`sec-quantity` for details.
+
+``linkable``
+^^^^^^^^^^^^
+
+Boolean describing whether the this group can be linked.
 
 ``attributes``
 ^^^^^^^^^^^^^^

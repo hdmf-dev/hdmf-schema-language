@@ -7,6 +7,7 @@ Version 2.1.0 (Upcoming)
 * First release as hdmf-schema-language.
 * Remove legacy description of the `specs` or `spec` key.
 * Add specification for the specification language used by each file.
+* add dtypes that are already supported in ``hdmf.spec``: short, uint64, bytes, and datetime
 
 Version 2.0.2 (March, 2020)
 ---------------------------------
@@ -29,8 +30,8 @@ Summary
     * Removed key: ```merge```
     * Removed key: ```merge+```
     * Removed key: ```data_type``` (replaced by ``data_type_inc`` and ``data_type_def``)
-    * Removed ```\_properties``` key. The primary use of the key is to define ``abstract`` specifications. However, as format specifications don't implement functions but define a layout of objects, any spec (even if marked abstract) could still be instantiated and used in practice without limitations. Also, in the current instantiation of NWB-N this concept is only used for the ```Interface``` type and it is unclear why a user should not be able to use it.  As such this concept was removed.
-    * To imporve compliance of NWB-N inheritance mechanism with established object-oriented design concepts, the option of restricting the use of subclasses in place of parent classes was removed. A subclass is always also a valid instance of a parent class. This also improves consistency with the NWB-N principle of a minimal specification that allows users to add custom data. This change affects the ```allow_subclasses``` key of links and the subclasses option of the removed ```include`` key.
+    * Removed ```\_properties``` key. The primary use of the key is to define ``abstract`` specifications. However, as format specifications don't implement functions but define a layout of objects, any spec (even if marked abstract) could still be instantiated and used in practice without limitations. Also, in the current instantiation of NWB:N this concept is only used for the ```Interface``` type and it is unclear why a user should not be able to use it.  As such this concept was removed.
+    * To improve compliance of NWB:N inheritance mechanism with established object-oriented design concepts, the option of restricting the use of subclasses in place of parent classes was removed. A subclass is always also a valid instance of a parent class. This also improves consistency with the NWB:N principle of a minimal specification that allows users to add custom data. This change affects the ```allow_subclasses``` key of links and the subclasses option of the removed ```include`` key.
 * Improve readability and avoid collision of keys by replacing values encoded in keys with dedicated key/value pairs:
     * Explicit encoding of names and types:
         * Added ```name``` key
@@ -43,13 +44,13 @@ Summary
     * Explicit encoding of quantitites:
         * Added new key ```quantity``` (which replaces the ```quantity_flag```). See below for details.
         * Removed ```quantity_flag``` as part of keys
-        * Removed `Exclude\_in`` key. The key is currently not used in the NWB core spec. This feature is superseded by the ability to overwrite the ```quantity``` key as part of the reuse of ```data_types```
+        * Removed `Exclude\_in`` key. The key is currently not used in the NWB core spec. This feature is superseded by the ability to overwrite the ```quantity``` key as part of the reuse of ```neurodata_types```
     * Removed ```\_description``` key. The key is no longer need because name conflicts with datasets and groups are no longer possible since the name is now explicitly encoded in a dedicated key/value pair.
 * Improve human readability:
     * Added support for YAML in addition to JSON
     * Values, such as, names, types, quantities etc. are now explicitly encoded in dedicated key/value pairs rather than being encoded as regular expressions in keys.
 * Improve direct interpretation of data:
-    * Remove ```references``` key. This key was used in previous versions of NWB to generate implicit data structures where datasets store references to part of other metadata structures. These implicit data structures violate core NWB principles as they hinder the direct interpretation of data and cannot be interpreted (neither by human nor program) based on NWB files alone without having additional informaton about the specification as well. Through simple reorganization of metadata in the file, all instances of these implicit data structures were replaced by simple links that can be interpreted directly.
+    * Remove ```references``` key. This key was used in previous versions of NWB to generate implicit data structures where datasets store references to part of other metadata structures. These implicit data structures violate core NWB principles as they hinder the direct interpretation of data and cannot be interpreted (neither by human nor program) based on NWB files alone without having additional information about the specification as well. Through simple reorganization of metadata in the file, all instances of these implicit data structures were replaced by simple links that can be interpreted directly.
 * Simplified specification of dimensions for datasets:
     * Renamed ```dimensions``` key to ```dims```
     * Added key ```shape``` to allow the specification of the shape of datasets
@@ -58,13 +59,13 @@ Summary
         * The length of the structs are used to define the length of the corresponding dimension as part of the ```shape``` key
         * ```alias``` for components of dimensions are currently encoded in the dimensions name.
 * Added support for default vs. fixed name for groups and datasets:
-     * Added ``default_name`` key for groups and dataset to allow the specification of default names for objects that can have user-defined names (in addition to fixed names via ``name``). Attributes can only have a fixed name since attributes can not have a data_type and can, hence, only be identified via their fixed name.
+     * Added ``default_name`` key for groups and dataset to allow the specification of default names for objects that can have user-defined names (in addition to fixed names via ``name``). Attributes can only have a fixed name since attributes can not have a neurodata_type and can, hence, only be identified via their fixed name.
 * Updated specification of fixed and default values for attributes to make the behavior of keys explicit:
     * Specifying attribute values:
         * Added ``default_value`` key for attributes to specify a default value for attributes
         * Removed ``const`` key for attributes which was used to control the behavior of the ``value`` key, i.e., depending on the value of ``const`` the ``value`` key would either act as a fixed or default value. By adding the ``default_value`` key this behavior now becomes explicit and the behavior of the ``value`` key no longer depends on the value of another key (i.e., the ``const`` key)
 * Improved governance and reuse of specifications:
-    * The core specification documents are no longer stored as .py files as part of the orignal Python API but are released as separate YAML (or optionally JSON) documents in a seperate repository
+    * The core specification documents are no longer stored as .py files as part of the original Python API but are released as separate YAML (or optionally JSON) documents in a seperate repository
     * All documentation has been ported to use reStructuredText (RST) markup that can be easily translated to PDF, HTML, text, and many other forms.
     * Documentation for source codes and the specification are auto-generated from source to ensure consistency between sources and the documentation
 * Avoid mixing of format specification and computations:
@@ -125,20 +126,24 @@ Version 1.2a replaces the ```quantity_flag``` with a new key ```quantity``` with
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To simplify the concept ```include``` and ```merge```, version 1.2a introduced a new
-key ```data_type_def``` which  describes the creation of a new data_type.
-The combination ```data_type_def``` and ```data_type_inc``
+key ```neurodata_type_def``` which  describes the creation of a new neurodata_type.
+The combination ```neurodata_type_def``` and ```neurodata_type_inc``
 simplifies the concepts of merge (i.e., inheritance/extension) and inclusion and
 allows us to express the same concepts in an easier-to-use fashion.
 Accordingly, the keys ```include```, ```merge``` and ```merge+``` have been removed in version 1.2a.
 Here a summary of the basic cases:
 
-.. csv-table::
-   :header: ``{{ data_type_inc }}``, ``{{ data_type_def }}``, Description
-
-    not set, not set, define a standard dataset or group without a type
-    not set, set, create a new data_type from scratch
-    set, not set, include (reuse) data_type without creating a new one (include)
-    set, set, merge/extend data_type and create a new type (inheritance/merge)
++--------------------+--------------------+------------------------------------------------------------------------+
+| neurodata_type_inc | neurodata_type_def |  Description                                                           |
++====================+====================+========================================================================+
+|not set             | not set            |  define standard dataset or group without a type                       |
++--------------------+--------------------+------------------------------------------------------------------------+
+|not set             | set                |  create a new neurodata_type from scratch                              |
++--------------------+--------------------+------------------------------------------------------------------------+
+|set                 | not set            |  include (reuse) neurodata_type without creating a new one (include)   |
++--------------------+--------------------+------------------------------------------------------------------------+
+|set                 | set                |  merge/extend neurodata_type and create a new type (merge)             |
++--------------------+--------------------+------------------------------------------------------------------------+
 
 ```structured_dimensions```
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -173,7 +178,7 @@ This mixing of functionality in turn led to several concerns:
 * autogen is specifically used to create derived data from information that is already in the NWB file.
   Attributes/datasets generated via autogen: i) are redundant, ii) often require bookkeeping to ensure data consistency,
   iii) generate dependencies across data and types, iv) have limited utility as the information can be derived through
-  other means, and v) interpreation of data values may require the provenance of autogen.
+  other means, and v) interpretation of data values may require the provenance of autogen.
 * Description of computations as part of a format specification was seen as problematic.
 * There was potential for collisions between autogen and the specification of the dataset/attribute itself.
 
