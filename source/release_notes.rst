@@ -7,7 +7,8 @@ Version 2.1.0 (Upcoming)
 * First release as hdmf-schema-language.
 * Remove legacy description of the `specs` or `spec` key.
 * Add specification for the specification language used by each file.
-* add dtypes that are already supported in ``hdmf.spec``: short, uint64, bytes, and datetime
+* Add dtypes that are already supported in ``hdmf.spec``: short, uint64, bytes, and datetime.
+* Clarify that if `name` is defined on a group/dataset/link specification, `quantity` may not be >1.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------

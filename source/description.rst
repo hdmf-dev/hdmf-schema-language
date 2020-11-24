@@ -406,6 +406,7 @@ describing the group. The ``doc`` key is required.
 The ``quantity`` describes how often the corresponding group (or dataset) can appear. The ``quantity``
 indicates both minimum and maximum number of instances. Hence, if the minimum number of instances is ``0``
 then the group (or dataset) is optional and otherwise it is required. The default value is ``quantity=1``.
+If ``name`` is defined, ``quantity`` may not be >1.
 
 +---------------------------------+-------------------+------------------+--------------------------+
 | value                           |  minimum quantity | maximum quantity |  Comment                 |
@@ -852,8 +853,8 @@ purpose and use of the linked data. The ``doc`` key is required.
 ``quantity``
 ^^^^^^^^^^^^
 
-Optional key specifying how many allowable instances for that link. Default is 1. If `name` is defined, quantity may not
-be >1. See :numref:`sec-quantity` for details.
+Optional key specifying how many allowable instances for that link. Default is 1. Same as for groups.
+See :numref:`sec-quantity` for details.
 
 
 .. _sec-dataset-spec:
@@ -960,12 +961,12 @@ Same as for groups. See :numref:`sec-quantity` for details.
 ``linkable``
 ^^^^^^^^^^^^
 
-Boolean describing whether the this group can be linked.
+Boolean describing whether the this dataset can be linked.
 
 ``attributes``
 ^^^^^^^^^^^^^^
 
-List of attribute specifications describing the attributes of the group. See Section :ref:`sec-attributes-spec` for details.
+List of attribute specifications describing the attributes of the dataset. See Section :ref:`sec-attributes-spec` for details.
 
 .. code-block:: yaml
 
