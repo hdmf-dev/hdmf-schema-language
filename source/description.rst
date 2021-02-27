@@ -188,6 +188,7 @@ List of the schema to be included in this namespace. The specification looks as 
      - namespace: core
        {{ data_types }}:
        - Interface
+       version: >=2, <3
 
 * ``source`` describes the name of the YAML (or JSON) file with the schema specification. The schema files should be
   located in the same folder as the namespace file.
@@ -199,9 +200,13 @@ List of the schema to be included in this namespace. The specification looks as 
 * ``{{ data_types }}`` is an optional list of strings indicating which data types should be
   included from the given specification source or namespace. The default is ``{{ data_types }}: null`` indicating that
   all data types should be included.
+* ``version`` is an optional string indicating the allowed versions of the namespace following the `PEP-440`_ scheme 
+  for dependency specification. For example, the version string ``>=2, <3`` specifies that any version between 2
+  (inclusive) and 3 (exclusive) is allowed. The default is ``version: null`` indicating that all versions are allowed.
 * ``doc`` is an optional key for source files with a doc string to further document the content of the source file.
 * ``title`` is an option key for source files to provide a descriptive title for a file for documentation purposes.
 
+.. _PEP-440: https://www.python.org/dev/peps/pep-0440/
 
 .. attention::
 
