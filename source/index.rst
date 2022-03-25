@@ -1,3 +1,5 @@
+.. _hdmf-specification-language:
+
 The {{ spec_format }} Specification Language
 ==============================================================================
 
