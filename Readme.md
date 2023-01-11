@@ -15,8 +15,7 @@ the `data_types` key in the namespace may be customized to be `neurodata_types` 
 and `neurodata_type_inc` for use in a neuroscience-specific application of the hdmf-schema-language. This can be
 easily done by forking the [hdmf-schema-language repo](https://github.com/hdmf-dev/hdmf-schema-language)
 and updating `source/namespace_map.yml` with the appropriate customizations. The `source/hdmf.schema.json` and any
-references to HDMF in the documentation should also be modified appropriately. See the [NWB schema language repo]
-(https://github.com/NeurodataWithoutBorders/nwb-schema-language) for an example of customizing the HDMF schema language
+references to HDMF in the documentation should also be modified appropriately. See the [NWB schema language repo](https://github.com/NeurodataWithoutBorders/nwb-schema-language) for an example of customizing the HDMF schema language
 for use as the NWB schema language.
 
 ## For maintainers
