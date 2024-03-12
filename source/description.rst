@@ -38,7 +38,9 @@ the format in order to store types of data not supported by the
 
     Each API for working with the {{ spec_format }} specification language may not yet provide
     full support for all features of the specification language. Please consult the API documentation
-    for details.
+    (e.g., `Support for the HDMF Specification Language in HDMF`_) for details.
+
+.. _Support for the HDMF Specification Language in HDMF: https://hdmf.readthedocs.io/en/dev/spec_language_support.html
 
 .. _sec-extensions:
 
