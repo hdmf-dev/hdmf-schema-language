@@ -1,1 +1,3 @@
 ruamel.yaml
+sphinx
+sphinx-rtd-theme
