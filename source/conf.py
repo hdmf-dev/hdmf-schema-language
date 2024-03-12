@@ -107,7 +107,8 @@ html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 with open('namespace_map.yml', 'r') as f:
-    namespace_map = yaml.safe_load(f)
+    yaml_obj = yaml.YAML(typ='safe', pure=True)
+    namespace_map = yaml_obj.load(f)
 
 
 def rstjinja(app, docname, source):
