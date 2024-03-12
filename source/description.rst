@@ -131,7 +131,7 @@ is a list with the specification of one (or more) namespaces.
 The beginning of the file must begin with a comment that starts with '{{ schema_language }}' followed by a space
 and the version string of the specification language used by this namespace, e.g.,
 ``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
-using {{ schema_language }} 2.1.0.
+using {{ schema_language }} 2.0.2.
 
 Namespace declaration keys
 --------------------------
@@ -226,7 +226,7 @@ Schema files should have the ``groups`` key and/or the ``datasets`` key at the t
 The beginning of all schema files must begin with a comment that starts with '{{ schema_language }}' followed by a space
 and the version string of the specification language used by this namespace, e.g.,
 ``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
-using {{ schema_language }} 2.1.0. The comment at the beginning of schema files must be the
+using {{ schema_language }} 2.0.2. The comment at the beginning of schema files must be the
 same as the comment at the start of the namespace file that includes the schema files.
 
 This is the main part of the format specification. It is described in the following sections.
@@ -256,7 +256,6 @@ Groups are specified as part of the top-level list or via lists stored in the ke
         default_name: Default name for the group
         doc: Required description of the group
         quantity: Optional quantity identifier for the group (default=1).
-        linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
         datasets: Optional list of dataset specifications describing the datasets contained in the group
         groups: Optional list of group specifications describing the sub-groups contained in the group
@@ -264,6 +263,10 @@ Groups are specified as part of the top-level list or via lists stored in the ke
 
 The key/value pairs that make up a group specification are described in more detail next in Section :numref:`sec-group-spec-keys`.
 The keys should be ordered as specified above for readability and consistency with the rest of the schema.
+
+.. note::
+
+    In version 3.0, the ``linkable`` key was removed.
 
 .. _sec-group-spec-keys:
 
@@ -425,11 +428,6 @@ If ``name`` is defined, ``quantity`` may not be >1.
     The ``quantity`` key was added in version 1.2a of the specification language as a replacement of the
     ```quantity_flag``` that was used to encode quantity information via a regular expression as part of the
     main key of the group.
-
-``linkable``
-^^^^^^^^^^^^
-
-Boolean describing whether the this group can be linked.
 
 ``attributes``
 ^^^^^^^^^^^^^^
@@ -879,7 +877,6 @@ The specification of a datasets is described in YAML as follows:
         default_value: Optional to set a default value for the dataset
         doc: Required description of the dataset
         quantity: Optional quantity identifier for the group (default=1).
-        linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
 
 The specification of datasets looks quite similar to attributes and groups. Similar to
@@ -891,6 +888,9 @@ The key/value pairs that make up a dataset specification are described in more d
 :numref:`sec-dataset-spec-keys`. The keys should be ordered as specified above for readability and consistency with the
 rest of the schema.
 
+.. note::
+
+    In version 3.0, the ``linkable`` key was removed.
 
 .. _sec-dataset-spec-keys:
 
@@ -957,11 +957,6 @@ describing the dataset. The ``doc`` key is required.
 ^^^^^^^^^^^^
 
 Same as for groups. See :numref:`sec-quantity` for details.
-
-``linkable``
-^^^^^^^^^^^^
-
-Boolean describing whether the this dataset can be linked.
 
 ``attributes``
 ^^^^^^^^^^^^^^
