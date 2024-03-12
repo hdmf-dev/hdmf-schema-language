@@ -5,9 +5,6 @@ Release Notes
 Version 3.0.0 (Upcoming)
 ---------------------------------
 * Deprecated ``linkable`` key for groups and datasets.
-
-Version 2.1.0 (Upcoming)
----------------------------------
 * First release as hdmf-schema-language.
 * Remove legacy description of the `specs` or `spec` key.
 * Add specification for the specification language used by each file.

@@ -131,7 +131,7 @@ is a list with the specification of one (or more) namespaces.
 The beginning of the file must begin with a comment that starts with '{{ schema_language }}' followed by a space
 and the version string of the specification language used by this namespace, e.g.,
 ``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
-using {{ schema_language }} 2.1.0.
+using {{ schema_language }} 2.0.2.
 
 Namespace declaration keys
 --------------------------
@@ -226,7 +226,7 @@ Schema files should have the ``groups`` key and/or the ``datasets`` key at the t
 The beginning of all schema files must begin with a comment that starts with '{{ schema_language }}' followed by a space
 and the version string of the specification language used by this namespace, e.g.,
 ``{{ schema_language }} 2.2.0``. Files without this comment are assumed to be defined
-using {{ schema_language }} 2.1.0. The comment at the beginning of schema files must be the
+using {{ schema_language }} 2.0.2. The comment at the beginning of schema files must be the
 same as the comment at the start of the namespace file that includes the schema files.
 
 This is the main part of the format specification. It is described in the following sections.
