@@ -34,6 +34,11 @@ the format in order to store types of data not supported by the
       {{ spec_format }}. For further details, see the {{ spec_format }} docs available here:
       http://{{ spec_format }}.readthedocs.io/en/latest/index.html
 
+.. note::
+
+    Each API for working with the {{ spec_format }} specification language may not yet provide
+    full support for all features of the specification language. Please consult the API documentation
+    for details.
 
 .. _sec-extensions:
 
