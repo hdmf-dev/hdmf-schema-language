@@ -587,7 +587,8 @@ String specifying the data type of the attribute. Allowable values are:
 +--------------------------+----------------------------------+----------------+
 | * "isodatetime"          | ISO 8601 datetime string, e.g.,  | variable       |
 |                          | 2018-09-28T14:43:54.123+02:00    | (ASCII         |
-| * "datetime"             |                                  | encoding)      |
+| * "datetime"             | Can be missing timezone. Can     | encoding)      |
+|                          | also be missing time.            |                |
 +--------------------------+----------------------------------+----------------+
 
 .. note::

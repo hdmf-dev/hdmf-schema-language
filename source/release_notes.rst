@@ -11,6 +11,7 @@ Version 3.0.0 (Upcoming)
 * Add specification for the specification language used by each file.
 * Add dtypes that are already supported in ``hdmf.spec``: short, uint64, bytes, and datetime.
 * Clarify that if `name` is defined on a group/dataset/link specification, `quantity` may not be >1.
+* Update ``datetime`` specification to allow a date with no time or timezone.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------
