@@ -264,6 +264,10 @@ Groups are specified as part of the top-level list or via lists stored in the ke
 The key/value pairs that make up a group specification are described in more detail next in Section :numref:`sec-group-spec-keys`.
 The keys should be ordered as specified above for readability and consistency with the rest of the schema.
 
+.. note::
+
+    In version 3.0, the ``linkable`` key was removed.
+
 .. _sec-group-spec-keys:
 
 Group specification keys
@@ -884,6 +888,9 @@ The key/value pairs that make up a dataset specification are described in more d
 :numref:`sec-dataset-spec-keys`. The keys should be ordered as specified above for readability and consistency with the
 rest of the schema.
 
+.. note::
+
+    In version 3.0, the ``linkable`` key was removed.
 
 .. _sec-dataset-spec-keys:
 
