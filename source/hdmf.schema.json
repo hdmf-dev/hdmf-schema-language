@@ -268,8 +268,6 @@
           "data_type_inc": {"$ref":  "#/definitions/protectedString"},
           "quantity": {"$ref":  "#/definitions/quantity"},
           "attributes": {"$ref": "#/definitions/attributes"},
-          "value": {"description": "Optional constant, fixed value for the attribute."},
-          "default_value": {"description": "Optional default value for variable-valued attributes."}
         }
       }
     }

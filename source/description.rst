@@ -874,8 +874,6 @@ The specification of a datasets is described in YAML as follows:
         dtype: Optional string describing the data type of the dataset
         dims: Optional list describing the names of the dimensions of the dataset
         shape: Optional list describing the shape (or possible shapes) of the dataset
-        value: Optional to fix value of dataset
-        default_value: Optional to set a default value for the dataset
         doc: Required description of the dataset
         quantity: Optional quantity identifier for the group (default=1).
         attributes: Optional list of attribute specifications describing the attributes of the group
@@ -890,6 +888,9 @@ The key/value pairs that make up a dataset specification are described in more d
 rest of the schema.
 
 .. note::
+
+    In version 3.0, the ``value`` and ``default_value`` keys were removed for datasets. The
+    ``value`` and ``default_value`` keys were only used for attributes and are not applicable to datasets.
 
     In version 3.0, the ``linkable`` key was removed.
 
@@ -939,10 +940,6 @@ List describing the shape of the dataset. Same as for attributes. See :numref:`s
 ^^^^^^^^
 
 List describing the names of the dimensions of the dataset. Same as for attributes. See :numref:`sec-dims` for details.
-
-``value`` and ``default_value``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Same as for attributes. See :numref:`sec-value` and :numref:`sec-default_value` for details.
 
 ``doc``
 ^^^^^^^
