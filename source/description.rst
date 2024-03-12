@@ -256,7 +256,6 @@ Groups are specified as part of the top-level list or via lists stored in the ke
         default_name: Default name for the group
         doc: Required description of the group
         quantity: Optional quantity identifier for the group (default=1).
-        linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
         datasets: Optional list of dataset specifications describing the datasets contained in the group
         groups: Optional list of group specifications describing the sub-groups contained in the group
@@ -425,11 +424,6 @@ If ``name`` is defined, ``quantity`` may not be >1.
     The ``quantity`` key was added in version 1.2a of the specification language as a replacement of the
     ```quantity_flag``` that was used to encode quantity information via a regular expression as part of the
     main key of the group.
-
-``linkable``
-^^^^^^^^^^^^
-
-Boolean describing whether the this group can be linked.
 
 ``attributes``
 ^^^^^^^^^^^^^^
@@ -879,7 +873,6 @@ The specification of a datasets is described in YAML as follows:
         default_value: Optional to set a default value for the dataset
         doc: Required description of the dataset
         quantity: Optional quantity identifier for the group (default=1).
-        linkable: Boolean indicating whether the group is linkable (default=True)
         attributes: Optional list of attribute specifications describing the attributes of the group
 
 The specification of datasets looks quite similar to attributes and groups. Similar to
@@ -957,11 +950,6 @@ describing the dataset. The ``doc`` key is required.
 ^^^^^^^^^^^^
 
 Same as for groups. See :numref:`sec-quantity` for details.
-
-``linkable``
-^^^^^^^^^^^^
-
-Boolean describing whether the this dataset can be linked.
 
 ``attributes``
 ^^^^^^^^^^^^^^
