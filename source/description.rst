@@ -768,6 +768,14 @@ may have multiple valid shape options, e.g.:
     - - null
       - 5
 
+To represent that an attribute/dataset can be any shape, including a scalar,
+use the special value "Any":
+
+.. code-block:: yaml
+
+    ...
+    shape: Any
+
 The default behavior for shape is:
 
 .. code-block:: yaml
