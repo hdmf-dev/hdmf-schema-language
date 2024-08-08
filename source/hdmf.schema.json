@@ -142,8 +142,7 @@
           "items": {"$ref": "#/definitions/shape_spec"}
         },
         {
-          "type": "string",
-          "value": "Any"
+          "const": "Any"
         }
       ]
     },
