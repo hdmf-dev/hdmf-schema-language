@@ -768,13 +768,16 @@ may have multiple valid shape options, e.g.:
     - - null
       - 5
 
-To represent that an attribute/dataset can be any shape, including a scalar,
-use the special value "Any":
+To represent that an attribute/dataset can be a scalar,
+use the special value "scalar":
 
 .. code-block:: yaml
 
     ...
-    shape: Any
+    shape: scalar
+
+Specifying that an attribute/dataset can be either a scalar or a non-scalar shape is
+currently not supported.
 
 The default behavior for shape is:
 
@@ -783,7 +786,12 @@ The default behavior for shape is:
     ...
     shape: null
 
-indicating that the attribute/dataset is a scalar.
+indicating that the attribute/dataset is any shape.
+
+.. note::
+
+    Prior to version 3.0, the default behavior for shape, ``shape: null``, meant that the
+    attribute/dataset is a scalar.
 
 .. _sec-value:
 

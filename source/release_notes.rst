@@ -12,7 +12,8 @@ Version 3.0.0 (Upcoming)
 * Added dtypes that are already supported in ``hdmf.spec``: short, uint64, bytes, and datetime.
 * Clarified that if ``name`` is defined on a group/dataset/link specification, ``quantity`` may not be greater than 1.
 * Updated ``datetime`` specification to allow a date with no time or timezone.
-* Added special value for shape: "Any" that represents any shape, including a scalar.
+* Changed the meaning of the default shape ``shape: null`` from representing a scalar to representing any shape.
+* Added special value for ``shape: scalar`` that represents a scalar.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------
