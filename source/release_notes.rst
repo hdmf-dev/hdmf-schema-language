@@ -2,7 +2,7 @@
 Release Notes
 =============
 
-Version 3.0.0 (August 26, 2024)
+Version 3.0.0 (August 12, 2024)
 ---------------------------------
 * Deprecated the ``default_value`` key for datasets. This key is still supported for attributes.
 * Deprecated ``linkable`` key for groups and datasets.
