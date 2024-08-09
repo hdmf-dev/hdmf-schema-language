@@ -3,7 +3,7 @@
   "$id": "hdmf.schema.json",
   "title": "Schema for the HDMF language specification",
   "description": "A schema for validating HDMF YAML files and HDMF extensions",
-  "version": "2.1.0-beta",
+  "version": "3.0.0-beta",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -98,6 +98,7 @@
             "int16",
             "int8",
             "uint",
+            "uint64",
             "uint32",
             "uint16",
             "uint8",
@@ -105,7 +106,7 @@
             "text",
             "utf",
             "utf8",
-            "unt-8",
+            "utf-8",
             "ascii",
             "bool",
             "isodatetime"
@@ -268,6 +269,7 @@
           "data_type_inc": {"$ref":  "#/definitions/protectedString"},
           "quantity": {"$ref":  "#/definitions/quantity"},
           "attributes": {"$ref": "#/definitions/attributes"},
+          "value": {"description": "Optional constant, fixed value for the dataset."}
         }
       }
     }

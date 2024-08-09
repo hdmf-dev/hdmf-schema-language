@@ -4,7 +4,7 @@ Release Notes
 
 Version 3.0.0 (April 10, 2024)
 ---------------------------------
-* Deprecated the ``default_value`` and ``value`` keys for datasets. These keys are still supported for attributes.
+* Deprecated the ``default_value`` key for datasets. This key is still supported for attributes.
 * Deprecated ``linkable`` key for groups and datasets.
 * First release as hdmf-schema-language.
 * Removed legacy description of the `specs` or `spec` key.
