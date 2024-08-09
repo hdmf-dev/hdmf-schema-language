@@ -14,5 +14,6 @@ See the full language description, release notes, and credits below.
    :caption: Table of Contents
 
    description
+   best_practices
    release_notes
    credits
