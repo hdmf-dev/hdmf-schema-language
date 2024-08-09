@@ -2,16 +2,18 @@
 Release Notes
 =============
 
-Version 3.0.0 (April 10, 2024)
+Version 3.0.0 (August 26, 2024)
 ---------------------------------
 * Deprecated the ``default_value`` key for datasets. This key is still supported for attributes.
 * Deprecated ``linkable`` key for groups and datasets.
 * First release as hdmf-schema-language.
-* Removed legacy description of the `specs` or `spec` key.
+* Removed legacy description of the ``specs`` or ``spec`` key.
 * Added specification for the specification language used by each file.
 * Added dtypes that are already supported in ``hdmf.spec``: short, uint64, bytes, and datetime.
-* Clarified that if `name` is defined on a group/dataset/link specification, `quantity` may not be >1.
+* Clarified that if ``name`` is defined on a group/dataset/link specification, ``quantity`` may not be greater than 1.
 * Updated ``datetime`` specification to allow a date with no time or timezone.
+* Changed the meaning of the default shape ``shape: null`` from representing a scalar to representing any shape.
+* Added special value for ``shape: scalar`` that represents a scalar.
 * Added best practices section to documentation.
 
 Version 2.0.2 (March, 2020)

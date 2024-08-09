@@ -141,6 +141,9 @@
         {
           "type": "array",
           "items": {"$ref": "#/definitions/shape_spec"}
+        },
+        {
+          "const": "scalar"
         }
       ]
     },
