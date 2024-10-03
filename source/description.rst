@@ -552,22 +552,22 @@ String specifying the data type of the attribute. Allowable values are:
 +--------------------------+----------------------------------+----------------+
 | ``dtype`` **spec value** | **storage type**                 | **size**       |
 +--------------------------+----------------------------------+----------------+
-| * "float"                | single precision floating point  | 32 bit         |
-| * "float32"              |                                  |                |
+| * "float64"              | double precision floating point  | 64 bit         |
+| * "double"               |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "double"               | double precision floating point  | 64 bit         |
-| * "float64"              |                                  |                |
+| * "float32"              | single precision floating point  | 32 bit         |
+| * "float"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "long"                 | signed 64 bit integer            | 64 bit         |
-| * "int64"                |                                  |                |
+| * "int64"                | signed 64 bit integer            | 64 bit         |
+| * "long"                 |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "int"                  | signed 32 bit integer            | 32 bit         |
-| * "int32"                |                                  |                |
+| * "int32"                | signed 32 bit integer            | 32 bit         |
 +--------------------------+----------------------------------+----------------+
-| * "short"                | signed 16 bit integer            | 16 bit         |
-| * "int16"                |                                  |                |
+| * "int16"                | signed 16 bit integer            | 16 bit         |
+| * "short"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "int8"                 | signed 8 bit integer             | 8 bit          |
+| * "int"                  |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "uint64"               | unsigned 64 bit integer          | 64 bit         |
 +--------------------------+----------------------------------+----------------+
@@ -576,6 +576,7 @@ String specifying the data type of the attribute. Allowable values are:
 | * "uint16"               | unsigned 16 bit integer          | 16 bit         |
 +--------------------------+----------------------------------+----------------+
 | * "uint8"                | unsigned 8 bit integer           | 8 bit          |
+| * "uint"                 |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "numeric"              | any numeric type (i.e., any int, | 8 to 64 bit    |
 |                          | uint, float)                     |                |
@@ -600,10 +601,14 @@ String specifying the data type of the attribute. Allowable values are:
 
 .. note::
 
-    The precision indicated in the specification is interpreted as a minimum precision.
+    The precision indicated in the specification is interpreted as a **minimum** precision.
     Higher precisions may be used if required by the particular data.
     In addition, since valid ASCII text is valid UTF-8-encoded Unicode, ASCII text may be used
     where 8-bit Unicode is required. 8-bit Unicode cannot be used where ASCII is required.
+
+.. note::
+
+    Prior to version 3.0, ``int`` was synonymous with ``int32``, and ``uint`` was not listed.
 
 Reference ``dtype``
 """""""""""""""""""
