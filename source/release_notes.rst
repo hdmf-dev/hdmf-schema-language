@@ -15,6 +15,8 @@ Version 3.0.0 (Upcoming)
 * Changed the meaning of the default shape ``shape: null`` from representing a scalar to representing any shape.
 * Added special value for ``shape: scalar`` that represents a scalar.
 
+* Deprecated region references and the "reftype: ref" and "reftype: reference" aliases for object references.
+
 Version 2.0.2 (March, 2020)
 ---------------------------------
 * add ``value`` and ``default_value`` as optional keys of a dataset.
