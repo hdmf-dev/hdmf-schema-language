@@ -87,21 +87,22 @@
         {
           "type": "string",
           "enum": [
-            "float",
-            "float32",
-            "double",
             "float64",
-            "long",
+            "double",
+            "float32",
+            "float",
             "int64",
-            "int",
+            "long",
             "int32",
             "int16",
+            "short",
             "int8",
-            "uint",
+            "int",
             "uint64",
             "uint32",
             "uint16",
             "uint8",
+            "uint",
             "numeric",
             "text",
             "utf",
@@ -163,16 +164,11 @@
     },
     "ref_dtype": {
       "type": "object",
-      "required": ["target_type", "reftype"],
+      "required": ["target_type"],
       "properties": {
         "target_type": {
           "description": "Describes the data_type of the target that the reference points to",
           "type": "string"
-        },
-        "reftype": {
-          "description": "describes the kind of reference",
-          "type": "string",
-          "enum": ["ref", "reference", "object", "region"]
         }
       }
     },

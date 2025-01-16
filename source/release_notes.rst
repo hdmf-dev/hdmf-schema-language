@@ -15,6 +15,11 @@ Version 3.0.0 (August 12, 2024)
 * Changed the meaning of the default shape ``shape: null`` from representing a scalar to representing any shape.
 * Added special value for ``shape: scalar`` that represents a scalar.
 * Added best practices section to documentation.
+* Changed the meaning of ``dtype: int`` from ``int32`` to ``int8`` to allow for arbitrary 
+  precision of numeric data when the minimum precision is not specified. Added 
+  ``dtype: uint`` which means uint8.
+* Deprecated region references and the "reftype: ref" and "reftype: reference" aliases for object references.
+* Removed the ``reftype`` key under the ``dtype`` dictionary. References can only be object references.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------

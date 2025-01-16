@@ -552,22 +552,22 @@ String specifying the data type of the attribute. Allowable values are:
 +--------------------------+----------------------------------+----------------+
 | ``dtype`` **spec value** | **storage type**                 | **size**       |
 +--------------------------+----------------------------------+----------------+
-| * "float"                | single precision floating point  | 32 bit         |
-| * "float32"              |                                  |                |
+| * "float64"              | double precision floating point  | 64 bit         |
+| * "double"               |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "double"               | double precision floating point  | 64 bit         |
-| * "float64"              |                                  |                |
+| * "float32"              | single precision floating point  | 32 bit         |
+| * "float"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "long"                 | signed 64 bit integer            | 64 bit         |
-| * "int64"                |                                  |                |
+| * "int64"                | signed 64 bit integer            | 64 bit         |
+| * "long"                 |                                  |                |
 +--------------------------+----------------------------------+----------------+
-| * "int"                  | signed 32 bit integer            | 32 bit         |
-| * "int32"                |                                  |                |
+| * "int32"                | signed 32 bit integer            | 32 bit         |
 +--------------------------+----------------------------------+----------------+
-| * "short"                | signed 16 bit integer            | 16 bit         |
-| * "int16"                |                                  |                |
+| * "int16"                | signed 16 bit integer            | 16 bit         |
+| * "short"                |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "int8"                 | signed 8 bit integer             | 8 bit          |
+| * "int"                  |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "uint64"               | unsigned 64 bit integer          | 64 bit         |
 +--------------------------+----------------------------------+----------------+
@@ -576,6 +576,7 @@ String specifying the data type of the attribute. Allowable values are:
 | * "uint16"               | unsigned 16 bit integer          | 16 bit         |
 +--------------------------+----------------------------------+----------------+
 | * "uint8"                | unsigned 8 bit integer           | 8 bit          |
+| * "uint"                 |                                  |                |
 +--------------------------+----------------------------------+----------------+
 | * "numeric"              | any numeric type (i.e., any int, | 8 to 64 bit    |
 |                          | uint, float)                     |                |
@@ -600,39 +601,32 @@ String specifying the data type of the attribute. Allowable values are:
 
 .. note::
 
-    The precision indicated in the specification is interpreted as a minimum precision.
+    The precision indicated in the specification is interpreted as a **minimum** precision.
     Higher precisions may be used if required by the particular data.
     In addition, since valid ASCII text is valid UTF-8-encoded Unicode, ASCII text may be used
     where 8-bit Unicode is required. 8-bit Unicode cannot be used where ASCII is required.
+
+.. note::
+
+    Prior to version 3.0, ``int`` was synonymous with ``int32``, and ``uint`` was not listed.
 
 Reference ``dtype``
 """""""""""""""""""
 
 In addition to the above basic data types, an attribute or dataset may also store references to other
-data objects. Reference ``dtypes`` are described via a dictionary. E.g.:
+data objects. Reference ``dtypes`` are described via a dictionary with one key, ``target_type``. E.g.:
 
 .. code-block:: yaml
 
   dtype:
-        target_type: ElectrodeGroup
-        reftype: object
+    target_type: ElectrodeGroup
 
+``target_type`` describes the ``data_type`` of the target that the reference points to.
 
-``target_type`` here describes the ``data_type`` of the target that the reference points to and
-``reftype`` describes the kind of reference. Currently the specification language supports two main
-reference types.
+.. note::
 
-+--------------------------+-------------------------------------+
-| ``reftype`` **value**    | **Reference type description**      |
-+--------------------------+-------------------------------------+
-| * "ref"                  | Reference to another group or       |
-| * "reference"            | dataset of the given                |
-| * "object"               | ``target_type``                     |
-+--------------------------+-------------------------------------+
-| * region                 | Reference to a region (i.e. subset) |
-|                          | of another dataset of the given     |
-|                          | ``target_type``                     |
-+--------------------------+-------------------------------------+
+    In version 3.0, "region" references were removed. Now, when ``dtype`` is a dictionary with key 
+    ``target_type``, it refers to an object reference.
 
 Compound ``dtype``
 """"""""""""""""""
@@ -696,7 +690,6 @@ create a table-like data structure for storing metadata about electrodes.
       - name: group_ref
         dtype:
             target_type: ElectrodeGroup
-            reftype: object
         doc: a reference to the ElectrodeGroup this electrode is a part of
       attributes:
         - doc: Value is 'a table for storing data about extracellular electrodes'
