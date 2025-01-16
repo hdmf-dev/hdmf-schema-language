@@ -18,6 +18,8 @@ Version 3.0.0 (Upcoming)
   precision of numeric data when the minimum precision is not specified. Added 
   ``dtype: uint`` which means uint8.
 
+* Deprecated region references and the "reftype: ref" and "reftype: reference" aliases for object references.
+
 Version 2.0.2 (March, 2020)
 ---------------------------------
 * add ``value`` and ``default_value`` as optional keys of a dataset.

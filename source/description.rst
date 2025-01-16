@@ -619,25 +619,25 @@ data objects. Reference ``dtypes`` are described via a dictionary. E.g.:
 .. code-block:: yaml
 
   dtype:
-        target_type: ElectrodeGroup
-        reftype: object
+    target_type: ElectrodeGroup
+    reftype: object
 
 
 ``target_type`` here describes the ``data_type`` of the target that the reference points to and
-``reftype`` describes the kind of reference. Currently the specification language supports two main
-reference types.
+``reftype`` describes the kind of reference. Currently the specification language supports one
+type of reference: object references.
 
 +--------------------------+-------------------------------------+
 | ``reftype`` **value**    | **Reference type description**      |
 +--------------------------+-------------------------------------+
-| * "ref"                  | Reference to another group or       |
-| * "reference"            | dataset of the given                |
-| * "object"               | ``target_type``                     |
-+--------------------------+-------------------------------------+
-| * region                 | Reference to a region (i.e. subset) |
-|                          | of another dataset of the given     |
+| * "object"               | Reference to another group or       |
+|                          | dataset of the given                |
 |                          | ``target_type``                     |
 +--------------------------+-------------------------------------+
+
+.. note::
+
+    In version 3.0, "region" references were removed. Now, ``reftype`` always refers to an object reference.
 
 Compound ``dtype``
 """"""""""""""""""

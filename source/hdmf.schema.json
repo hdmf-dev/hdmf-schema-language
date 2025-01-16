@@ -171,9 +171,9 @@
           "type": "string"
         },
         "reftype": {
-          "description": "describes the kind of reference",
+          "description": "Describes the kind of reference",
           "type": "string",
-          "enum": ["ref", "reference", "object", "region"]
+          "enum": ["object"]
         }
       }
     },
