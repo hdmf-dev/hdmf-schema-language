@@ -614,30 +614,19 @@ Reference ``dtype``
 """""""""""""""""""
 
 In addition to the above basic data types, an attribute or dataset may also store references to other
-data objects. Reference ``dtypes`` are described via a dictionary. E.g.:
+data objects. Reference ``dtypes`` are described via a dictionary with one key, ``target_type``. E.g.:
 
 .. code-block:: yaml
 
   dtype:
     target_type: ElectrodeGroup
-    reftype: object
 
-
-``target_type`` here describes the ``data_type`` of the target that the reference points to and
-``reftype`` describes the kind of reference. Currently the specification language supports one
-type of reference: object references.
-
-+--------------------------+-------------------------------------+
-| ``reftype`` **value**    | **Reference type description**      |
-+--------------------------+-------------------------------------+
-| * "object"               | Reference to another group or       |
-|                          | dataset of the given                |
-|                          | ``target_type``                     |
-+--------------------------+-------------------------------------+
+``target_type`` describes the ``data_type`` of the target that the reference points to.
 
 .. note::
 
-    In version 3.0, "region" references were removed. Now, ``reftype`` always refers to an object reference.
+    In version 3.0, "region" references were removed. Now, when ``dtype`` is a dictionary with key 
+    ``target_type``, it refers to an object reference.
 
 Compound ``dtype``
 """"""""""""""""""
@@ -701,7 +690,6 @@ create a table-like data structure for storing metadata about electrodes.
       - name: group_ref
         dtype:
             target_type: ElectrodeGroup
-            reftype: object
         doc: a reference to the ElectrodeGroup this electrode is a part of
       attributes:
         - doc: Value is 'a table for storing data about extracellular electrodes'

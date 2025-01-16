@@ -164,16 +164,11 @@
     },
     "ref_dtype": {
       "type": "object",
-      "required": ["target_type", "reftype"],
+      "required": ["target_type"],
       "properties": {
         "target_type": {
           "description": "Describes the data_type of the target that the reference points to",
           "type": "string"
-        },
-        "reftype": {
-          "description": "Describes the kind of reference",
-          "type": "string",
-          "enum": ["object"]
         }
       }
     },
