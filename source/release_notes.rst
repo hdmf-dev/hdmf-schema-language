@@ -14,6 +14,9 @@ Version 3.0.0 (Upcoming)
 * Updated ``datetime`` specification to allow a date with no time or timezone.
 * Changed the meaning of the default shape ``shape: null`` from representing a scalar to representing any shape.
 * Added special value for ``shape: scalar`` that represents a scalar.
+* Changed the meaning of ``dtype: int`` from ``int32`` to ``int8`` to allow for arbitrary 
+  precision of numeric data when the minimum precision is not specified. Added 
+  ``dtype: uint`` which means uint8.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------
