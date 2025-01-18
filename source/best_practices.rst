@@ -28,8 +28,8 @@ which is incompatible with the ``dtype`` of type A. The same idea holds if type 
 and a new type is not defined (just ``data_type_inc: A``).
 In other words, all children types should be valid against the parent type. See `hdmf#321`_.
 
-7. Non-scalar values for the ``value`` and ``default_value`` keys are not fully supported in the official APIs,
-so these are discouraged until support is added.
+7. The use of list values for the ``value`` and ``default_value`` keys, e.g., ``value: [0, 1, 2]`` is not fully
+supported in the official APIs, so this are discouraged until full, tested support is added.
 
 8. Do not put spaces in the names of data types or objects. This can lead to unexpected behavior in the APIs.
 See `pynwb#1421`_ for an example.
