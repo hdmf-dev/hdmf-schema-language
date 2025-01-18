@@ -31,8 +31,10 @@ In other words, all children types should be valid against the parent type. See 
 7. The use of list values for the ``value`` and ``default_value`` keys, e.g., ``value: [0, 1, 2]`` is not fully
 supported in the official APIs, so this are discouraged until full, tested support is added.
 
-8. Do not put spaces in the names of data types or objects. This can lead to unexpected behavior in the APIs.
-See `pynwb#1421`_ for an example.
+8. The names of data types or objects should use only characters in the sets ``a-z``, ``A-Z``, ``0-9``, ``-``, ``_``,
+``.``. This helps ensure consistent behavior in the APIs across different storage backends and operating systems.
+For example, writing a group that contains ":" to a Zarr backend on a Windows machine is not allowed by Windows.
+See `pynwb#1421`_ and `hdmf-zarr#219`_ for examples.
 
 
 .. _hdmf#511: https://github.com/hdmf-dev/hdmf/issues/511
@@ -40,4 +42,5 @@ See `pynwb#1421`_ for an example.
 .. _hdmf-schema-language#13: https://github.com/hdmf-dev/hdmf-schema-language/issues/13
 .. _hdmf#321: https://github.com/hdmf-dev/hdmf/issues/321
 .. _pynwb#1421: https://github.com/NeurodataWithoutBorders/pynwb/issues/1421
+.. _hdmf-zarr#219: https://github.com/hdmf-dev/hdmf-zarr/issues/219
 .. _hdmf_support: https://hdmf.readthedocs.io/en/stable/spec_language_support.html
