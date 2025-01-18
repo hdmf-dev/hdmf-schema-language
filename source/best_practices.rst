@@ -7,7 +7,7 @@ practices to ensure correct behavior from the HDMF reference API and other APIs 
 definition. Nested type definitions may in some cases lead to errors in HDMF. See `hdmf#511`_ and `hdmf#73`_.
 
 3. Use the ``quantity`` key not in the data type definition but in the group/dataset spec where the type is included.
-When the data type is included within another data type via ``data_type_inc``, if the ``quantity`` key omitted, the
+When the data type is included within another data type via ``data_type_inc``, if the ``quantity`` key is omitted, the
 default value of 1 would be used. This makes the ``quantity`` defined in the data type definition meaningless
 and confusing.
 
