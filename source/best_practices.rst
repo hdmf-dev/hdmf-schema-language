@@ -17,8 +17,8 @@ defined on the data type definition and where it is included can lead to unexpec
 
 5. Create a new data type when adding attributes/datasets/groups/links to an existing data type. See
 `hdmf-schema-language#13`_ for details. Adding attributes/datasets/groups/links to an existing data type using
-``data_type_inc`` is partially supported by the APIs, particularly the validator, so this is discouraged until
-full, tested support is added.
+``data_type_inc`` is partially supported by the APIs (for example, the validator may not check these added fields),
+so this is discouraged until full, tested support is added.
 
 6. Modifying the dtype, shape, or quantity of a data type when using ``data_type_inc`` should only restrict the values
 from their original definitions. This ensures that the data types follow the object-oriented programming principle of
