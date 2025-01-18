@@ -29,7 +29,7 @@ and a new type is not defined (just ``data_type_inc: A``).
 In other words, all children types should be valid against the parent type. See `hdmf#321`_.
 
 7. The use of list values for the ``value`` and ``default_value`` keys, e.g., ``value: [0, 1, 2]`` is not fully
-supported in the official APIs, so this are discouraged until full, tested support is added.
+supported in the official APIs, so this is discouraged until full, tested support is added.
 
 8. The names of data types or objects should use only characters in the sets ``a-z``, ``A-Z``, ``0-9``, ``-``, ``_``,
 ``.``. This helps ensure consistent behavior in the APIs across different storage backends and operating systems.
