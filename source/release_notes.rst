@@ -2,7 +2,7 @@
 Release Notes
 =============
 
-Version 3.0.0 (Upcoming)
+Version 3.0.0 (January 21, 2025)
 ---------------------------------
 * Deprecated the ``default_value`` key for datasets. This key is still supported for attributes.
 * Deprecated ``linkable`` key for groups and datasets.
@@ -14,6 +14,7 @@ Version 3.0.0 (Upcoming)
 * Updated ``datetime`` specification to allow a date with no time or timezone.
 * Changed the meaning of the default shape ``shape: null`` from representing a scalar to representing any shape.
 * Added special value for ``shape: scalar`` that represents a scalar.
+* Added best practices section to documentation.
 * Changed the meaning of ``dtype: int`` from ``int32`` to ``int8`` to allow for arbitrary 
   precision of numeric data when the minimum precision is not specified. Added 
   ``dtype: uint`` which means uint8.
