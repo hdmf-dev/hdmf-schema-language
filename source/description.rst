@@ -25,14 +25,13 @@ the format in order to store types of data not supported by the
 .. seealso::
 
     * For detailed description of the hdmf-common data format, see here:
-      http://hdmf-common-schema.readthedocs.io/en/latest/index.html
+      https://hdmf-common-schema.readthedocs.io
     * The mapping of objects described in the specification language to HDF5 is
       described in more detail in the NWB storage docs:
-      http://nwb-storage.readthedocs.io/en/latest/
+      https://nwb-storage.readthedocs.io
     * Data structures for interacting with the specification language documents
-      (e.g., namespace and specification YAML/JSON files) are available as part of
-      {{ spec_format }}. For further details, see the {{ spec_format }} docs available here:
-      http://{{ spec_format }}.readthedocs.io/en/latest/index.html
+      (e.g., namespace and specification YAML/JSON files) are available here:
+      https://hdmf.readthedocs.io/en/stable/hdmf.spec.html
 
 .. note::
 
@@ -78,19 +77,19 @@ and subsequent sections.
     The ``hdmf-docutils`` package includes tools to generate Sphinx documentation from
     format specifications. In particular the executable ``hdmf_init_sphinx_extension_doc``
     provides functionality to set up documentation for a format or extension defined
-    by a namespace (similar to the documentation for NWB core namespace at http://nwb-schema.readthedocs.io/en/latest/ ).
+    by a namespace (similar to the documentation for NWB core namespace at https://nwb-schema.readthedocs.io ).
     Use ``hdmf_init_sphinx_extension_doc --help`` to view the list
     of options for generating the docs. The package also includes the executable ``hdmf_generate_format_docs``
     which is used for generating actual reStructuredText files and figures from YAML/JSON
-    specification sources. For an example see: http://pynwb.readthedocs.io/en/latest/example.html#documenting-extensions
+    specification sources. For an example see:
+    https://nwb-overview.readthedocs.io/en/latest/extensions_tutorial/6_documenting_extension.html
 
 .. seealso::
 
     For examples on how to create and use extensions in PyNWB, see:
 
-    * http://pynwb.readthedocs.io/en/latest/example.html#extending-nwb : Examples showing how to extend NWB
-    * http://pynwb.readthedocs.io/en/latest/tutorials.html#extensions : Tutorial showing how to define and use extensions
-
+    * https://nwb-overview.readthedocs.io/en/latest/extensions_tutorial/extensions_tutorial_home.html : Examples showing how to extend NWB
+    * https://pynwb.readthedocs.io/en/latest/tutorials/general/extensions.html : Tutorial showing how to define and use extensions
 
 .. _sec-namespace-dec:
 
