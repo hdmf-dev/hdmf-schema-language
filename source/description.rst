@@ -544,7 +544,8 @@ Attribute specification keys
 
 String with the name for the attribute. The ``name`` key is required and must
 specify a unique attribute on the current parent object (e.g., group or dataset).
-The name must not contain whitespace.
+The name must follow the regular expression pattern: 
+``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 .. _sec-dtype:
 
