@@ -160,8 +160,8 @@ Optional string with extended full name for the namespace.
 ``version``
 ^^^^^^^^^^^
 
-Version string for the namespace. The version string must follow the NWB versioning guidelines:
-https://www.nwb.org/versioning-guidelines/
+Version string for the namespace. The version string must not contain ":" or "/". It should follow 
+the NWB versioning guidelines: https://www.nwb.org/versioning-guidelines/
 
 ``date``
 ^^^^^^^^
