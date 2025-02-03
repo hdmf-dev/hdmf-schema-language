@@ -908,7 +908,8 @@ The key/value pairs that make up a dataset specification are described in more d
 :numref:`sec-dataset-spec-keys`. The keys should be ordered as specified above for readability and consistency with the
 rest of the schema.
 
-The ``name``, ``default_name``, ``{{ data_type_def }}``, and ``{{ data_type_inc }}``  must not contain ":" or "/".
+The ``name``, ``default_name``, ``{{ data_type_def }}``, and ``{{ data_type_inc }}``  must follow the 
+regular expression pattern: ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 .. note::
 
