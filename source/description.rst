@@ -854,7 +854,8 @@ Link specification keys
 ``name``
 ^^^^^^^^
 
-Optional key specifying the ``name`` of the link.
+Optional key specifying the ``name`` of the link. The name must follow the 
+regular expression pattern: ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 ``target_type``
 ^^^^^^^^^^^^^^^
