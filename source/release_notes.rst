@@ -20,6 +20,13 @@ Version 3.0.0 (Upcoming)
   ``dtype: uint`` which means uint8.
 * Deprecated region references and the "reftype: ref" and "reftype: reference" aliases for object references.
 * Removed the ``reftype`` key under the ``dtype`` dictionary. References can only be object references.
+* Specified that the namespace name must not contain ":", "/", or whitespace.
+* Specified that the namespace version string must not contain ":" or "/". It should follow 
+  the NWB versioning guidelines: https://www.nwb.org/versioning-guidelines/ .
+* Specified that the name and default name of a group, dataset, link, and attribute must follow the regular
+  expression ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
+* Specified that data_type_def (and therefore also data_type_inc) must follow the regular
+  expression ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------
