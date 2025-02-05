@@ -150,7 +150,7 @@ Text description of the namespace.
 ``name``
 ^^^^^^^^
 
-Unique name used to refer to the namespace.
+Unique name used to refer to the namespace. The name must not contain ":", "/", or whitespace.
 
 ``full_name``
 ^^^^^^^^^^^^^
@@ -160,7 +160,8 @@ Optional string with extended full name for the namespace.
 ``version``
 ^^^^^^^^^^^
 
-Version string for the namespace
+Version string for the namespace. The version string must not contain ":" or "/". It should follow 
+the NWB versioning guidelines: https://www.nwb.org/versioning-guidelines/
 
 ``date``
 ^^^^^^^^
@@ -269,6 +270,9 @@ Groups are specified as part of the top-level list or via lists stored in the ke
 
 The key/value pairs that make up a group specification are described in more detail next in Section :numref:`sec-group-spec-keys`.
 The keys should be ordered as specified above for readability and consistency with the rest of the schema.
+
+The ``name``, ``default_name``, ``{{ data_type_def }}``, and ``{{ data_type_inc }}``  must follow the 
+regular expression pattern: ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 .. note::
 
@@ -539,7 +543,9 @@ Attribute specification keys
 ^^^^^^^^
 
 String with the name for the attribute. The ``name`` key is required and must
-specify a unique attribute on the current parent object (e.g., group or dataset)
+specify a unique attribute on the current parent object (e.g., group or dataset).
+The name must follow the regular expression pattern: 
+``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 .. _sec-dtype:
 
@@ -848,7 +854,8 @@ Link specification keys
 ``name``
 ^^^^^^^^
 
-Optional key specifying the ``name`` of the link.
+Optional key specifying the ``name`` of the link. The name must follow the 
+regular expression pattern: ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 ``target_type``
 ^^^^^^^^^^^^^^^
@@ -901,6 +908,9 @@ typically manage larger data than attributes).
 The key/value pairs that make up a dataset specification are described in more detail next in Section
 :numref:`sec-dataset-spec-keys`. The keys should be ordered as specified above for readability and consistency with the
 rest of the schema.
+
+The ``name``, ``default_name``, ``{{ data_type_def }}``, and ``{{ data_type_inc }}``  must follow the 
+regular expression pattern: ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 
 .. note::
 
