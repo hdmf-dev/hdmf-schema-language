@@ -27,6 +27,8 @@ Version 3.0.0 (Upcoming)
   expression ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
 * Specified that data_type_def (and therefore also data_type_inc) must follow the regular
   expression ``^[A-Za-z_][A-Za-z0-9_]*$`` to ensure compatibility across APIs.
+* Clarified that if ``dtype`` is not specified, then any ``dtype`` is allowed, including any basic
+  ``dtype`` spec value, any reference ``dtype``, or any compound ``dtype``.
 
 Version 2.0.2 (March, 2020)
 ---------------------------------
