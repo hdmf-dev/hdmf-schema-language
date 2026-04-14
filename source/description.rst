@@ -614,6 +614,11 @@ String specifying the data type of the attribute. Allowable values are:
 
     Prior to version 3.0, ``int`` was synonymous with ``int32``, and ``uint`` was not listed.
 
+.. note::
+
+    If ``dtype`` is not specified, then any ``dtype`` is allowed, including any of the basic
+    ``dtype`` spec values listed above, any reference ``dtype``, or any compound ``dtype``.
+
 Reference ``dtype``
 """""""""""""""""""
 
