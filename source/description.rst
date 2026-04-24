@@ -905,17 +905,14 @@ The specification of a datasets is described in YAML as follows:
         quantity: Optional quantity identifier for the group (default=1).
         attributes: Optional list of attribute specifications describing the attributes of the group
 
-A dataset specification defines an n-dimensional array. Similar to attributes,
-datasets describe the storage of arbitrary n-dimensional array data. However, in
-contrast to attributes, datasets are primary data objects that typically manage
-larger amounts of data and can itself carry attributes. Datasets are always
-located inside a group (and in the basic case, the root `/` group).
-The ``dtype``, ``shape``, and ``dims``
-keys always describe this array payload; omitting ``shape``/``dims`` means the array
-may have any shape, and omitting ``dtype`` means the array may have any dtype. A
-scalar dataset is represented as a 0-dimensional array (see :numref:`sec-shape` for
-how to specify a scalar shape). APIs that represent datasets must expose this array
-in a field. This field is conventionally named ``data``.
+A dataset specification defines an n-dimensional array. In contrast to attributes,
+datasets are primary data objects that typically manage larger amounts of data and
+can themselves carry attributes. Datasets are always located inside a group, even
+if that group is the root ``/`` group.
+The ``dtype``, ``shape``, and ``dims`` keys describe this array; omitting
+``shape``/``dims`` means the array may have any shape, and omitting ``dtype`` means
+the array may have any dtype. A scalar dataset is represented as a 0-dimensional
+array (see :numref:`sec-shape` for how to specify a scalar shape).
 
 The specification of datasets in YAML looks quite similar to attributes and groups.
 The key/value pairs that make up a dataset specification are described in more detail next in Section
