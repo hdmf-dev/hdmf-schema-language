@@ -15,10 +15,14 @@ and confusing.
 unless you really want to require that all instances of the data type have that name. Mismatch between the name
 defined on the data type definition and where it is included can lead to unexpected behavior in the APIs.
 
-5. Create a new data type when adding attributes/datasets/groups/links to an existing data type. See
-`hdmf-schema-language#13`_ for details. Adding attributes/datasets/groups/links to an existing data type using
-``data_type_inc`` is partially supported by the APIs (for example, the validator may not check these added fields),
-so this is discouraged until full, tested support is added.
+5. When adding attributes, datasets, groups, or links to an existing data type, create a new data type that extends
+it (using both ``data_type_def`` and ``data_type_inc``) rather than adding those fields to an included instance of
+the type (i.e., a group/dataset that uses only ``data_type_inc: X`` without a ``data_type_def``). For example, if a
+group includes a named dataset with ``data_type_inc: VectorData`` and adds a ``resolution`` attribute to that
+dataset, the added attribute is tied to that specific included location rather than to a reusable data type, and is
+only partially supported by the APIs (for example, the validator may not check these added fields). Instead, define
+a new type that extends ``VectorData`` with the ``resolution`` attribute, and include that type. See
+`hdmf-schema-language#13`_ for details.
 
 6. Modifying the dtype, shape, or quantity of a data type when using ``data_type_inc`` should only restrict the values
 from their original definitions. This ensures that the data types follow the object-oriented programming principle of
