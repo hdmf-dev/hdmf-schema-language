@@ -1,3 +1,6 @@
+Best Practices
+==============
+
 When writing schema using the HDMF Schema Language, including extensions, the HDMF development team provides a few best
 practices to ensure correct behavior from the HDMF reference API and other APIs that we are aware of (e.g., MatNWB).
 
