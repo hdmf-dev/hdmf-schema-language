@@ -11,3 +11,8 @@
       overflow: visible !important;
    }
 }
+
+/* add breathing room between numbered list items */
+.rst-content ol.arabic > li {
+   margin-bottom: 1em;
+}
